@@ -5,7 +5,8 @@ import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
 /**
- * @author 罗利华
+ * Base64测试
+ * @author Victor
  * date: 2019/6/20 16:36
  */
 public class Base64Test {

@@ -4,7 +4,7 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 
 /**
- * @author 罗利华
+ * @author Victor
  *
  * https://blog.csdn.net/qq_30683329/article/details/80879058
  * https://www.cnblogs.com/hihtml5/p/6064999.html

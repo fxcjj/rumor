@@ -7,7 +7,7 @@ import java.security.MessageDigest;
  *
  * https://www.cnblogs.com/foreverzxb/p/5349261.html
  *
- * @author 罗利华
+ * @author Victor
  * date: 2019/6/21 10:56
  */
 public class SHATest {

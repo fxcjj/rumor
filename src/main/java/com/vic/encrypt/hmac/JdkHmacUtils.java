@@ -6,11 +6,10 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.Charset;
 
-
 /**
  * hmac加密
  * 使用jdk
- * @author 罗利华
+ * @author Victor
  *
  * https://www.jianshu.com/p/18d65e43d1f5
  *

@@ -12,7 +12,7 @@ import java.nio.charset.Charset;
 /**
  * hmac加密
  * 使用apache commons codec
- * @author 罗利华
+ * @author Victor
  *
  * https://www.jianshu.com/p/18d65e43d1f5
  *

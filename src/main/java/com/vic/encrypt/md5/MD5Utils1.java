@@ -5,7 +5,7 @@ import org.springframework.util.DigestUtils;
 /**
  * MD5工具类
  * 使用的是Spring的工具类
- * @author 罗利华
+ * @author Victor
  * date: 2019/6/20 19:45
  */
 public class MD5Utils1 {
