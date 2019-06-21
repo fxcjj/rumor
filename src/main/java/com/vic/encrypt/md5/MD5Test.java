@@ -1,8 +1,7 @@
-package com.vic.md5;
+package com.vic.encrypt.md5;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 /**
  * @author 罗利华
@@ -15,25 +14,17 @@ import java.security.NoSuchAlgorithmException;
 public class MD5Test {
 
     public static void main(String[] args) throws Exception {
-        String str = "123";
-
-//        System.out.println(test1(str));
+        String str = "tangfuqiang";
+        System.out.println(test1(str));
+        System.out.println(test2(str));
+        System.out.println(MD5Utils.md5(str));
+        System.out.println(MD5Utils1.md5(str));
 //        System.out.println(test2(str));
-        System.out.println(test3(str));
 
     }
 
     /**
-     * 使用commons-lang3
-     * @param str
-     * @return
-     * @throws Exception
-     */
-    private static String test3(String str) throws Exception {
-        return null;
-    }
-    /**
-     * 使用到了BigInteger
+     * 使用java自带，BigInteger类
      * @param str
      * @return
      * @throws Exception
@@ -52,7 +43,7 @@ public class MD5Test {
     }
 
     /**
-     * 自定义byteArrayToHex方法
+     * 使用java自带，自定义byteArrayToHex方法
      * @param str
      * @return
      * @throws Exception
@@ -73,7 +64,7 @@ public class MD5Test {
 
         // 转换并返回结果，也是字节数组，包含16个元素
         byte[] resultByteArray = md.digest();
-        System.out.println(resultByteArray.length);
+//        System.out.println(resultByteArray.length);
 
         // 字符数组转换成字符串返回
         return byteArrayToHex(resultByteArray);

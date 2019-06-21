@@ -1,4 +1,4 @@
-package com.vic.base64;
+package com.vic.encrypt.base64;
 
 import org.apache.commons.codec.binary.Base64;
 import sun.misc.BASE64Decoder;

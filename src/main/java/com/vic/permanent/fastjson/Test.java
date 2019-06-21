@@ -31,7 +31,7 @@ public abstract class Test {
 		 */
 		User user = JSON.parseObject(jsonString, User.class);
 //		System.out.println(user);
-		
+
 		/**
 		 * 将json字符串解析为JSONObject(key/value数据格式)
 		 */
@@ -65,20 +65,21 @@ public abstract class Test {
 //		System.out.println(JSON.toJSONString(userList));
 		
 		/**
-		 * 
+		 * 将json字符串数组 转换 为JSONArray对象
 		 */
-		
 		String str = "[{\"id\":1,\"name\":\"u1\"},{\"id\":2,\"name\":\"u2\"}]";
 		JSONArray parseArray = JSON.parseArray(str);
 //		System.out.println(parseArray.toJSONString());
-		
+
+		/**
+		 * 将json字符串数组 转换 指定类型的集合
+		 */
 		List<User> uList = JSON.parseArray(str, User.class);
 //		System.out.println(uList);
 		
 		/**
 		 * 对象包含对象
 		 */
-		
 		List<User> userList2 = new ArrayList<User>();
 		userList2.add(new User(1, "u1"));
 		userList2.add(new User(2, "u2"));
@@ -91,29 +92,24 @@ public abstract class Test {
 //		System.out.println(JSON.toJSONString(group));
 		
 		//{"id":1,"name":"g1","userList":[{"id":1,"name":"u1"},{"id":2,"name":"u2"}]}
-//		String groupStr = "{\"id\":1,\"name\":\"g1\",\"userList\":[{\"id\":1,\"name\":\"u1\"},{\"id\":2,\"name\":\"u2\"}]}";
-		
-//		Group g = JSON.parseObject(groupStr, Group.class);
-		
+		String groupStr = "{\"id\":1,\"name\":\"g1\",\"userList\":[{\"id\":1,\"name\":\"u1\"},{\"id\":2,\"name\":\"u2\"}]}";
+		Group g = JSON.parseObject(groupStr, Group.class);
 //		System.out.println(g);
-		
+//		System.out.println(g.getUserList());
+
+
+		/**
+		 * 将map转换为json字符串
+		 */
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("create_time", "2018-05-31 13:59:33");
 		map.put("id", "1");
 		map.put("name", "张三");
-		
 		String jsonStr = JSON.toJSONString(map);
-		
 //		System.out.println(jsonStr);
-		
-		User user1 = JSON.parseObject(jsonStr, User.class);
-		
-//		System.out.println(user1);
 
 
-		String a = "{\"code\":\"000\",\"msg\":\"上传成功\",\"result\":{\"id_card_number\":\"411421199105116029\",\"name\":\"江淑敏\"}}";
-		System.out.println(JSON.toJSONString(a));
-		
+
 	}
 
 }
