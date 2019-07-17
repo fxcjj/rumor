@@ -13,8 +13,21 @@ public class Base64Test {
 
     public static void main(String[] args) throws Exception {
 //        test1();
-//        test2();
-        test3();
+        test2();
+//        test3();
+
+        String header = "{\n" +
+                "  \"alg\": \"HS256\",\n" +
+                "  \"typ\": \"JWT\"\n" +
+                "}";
+//        byte[] bytes = Base64.encodeBase64URLSafe(header.getBytes());
+//        System.out.println(new String(bytes));
+
+//        System.out.println(new String(Base64.decodeBase64("ewogICJhbGciOiAiSFMyNTYiLAogICJ0eXAiOiAiSldUIgp9")));
+
+
+
+
     }
 
     /**
@@ -39,14 +52,20 @@ public class Base64Test {
      * @throws Exception
      */
     private static void test2() throws Exception {
-        final Base64 base64 = new Base64();
-        final String text = "字串文字";
-        final byte[] textByte = text.getBytes("UTF-8");
+        Base64 base64 = new Base64();
+        String text = "i am your dady";
+        byte[] textByte = text.getBytes("UTF-8");
+
         //编码
-        final String encodedText = base64.encodeToString(textByte);
+        String encodedText = base64.encodeToString(textByte);
+//        String encodedText = new String(Base64.encodeBase64(textByte));
+
         System.out.println(encodedText);
+
         //解码
-        System.out.println(new String(base64.decode(encodedText), "UTF-8"));
+//        String decodeText = new String(base64.decode(encodedText), "UTF-8");
+        String decodeText = new String(Base64.decodeBase64(encodedText.getBytes()));
+        System.out.println(decodeText);
     }
 
     /**

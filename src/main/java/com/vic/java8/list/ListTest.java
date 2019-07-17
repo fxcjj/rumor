@@ -5,55 +5,49 @@ import com.vic.entity.User;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ListTest {
 	
 	public static void main(String[] args) {
-		List<User> u1 = new ArrayList<User>();
-		u1.add(new User("u1", "p1"));
-		u1.add(new User(null, "p2"));
-		u1.add(new User("u3", "p3"));
-		u1.add(new User(null, "p4"));
-		
-		u1.stream().filter(x -> x.getUsername() == null || "".equals(x.getUsername())).forEach(x -> {
-			x.setUsername("aaaaaa");
-		});
-		
-		u1.forEach(System.out::println);
-		
-		//don't dispose null element, and reset username
-		/*u1.stream().filter(item -> item != null).forEach(item -> {
-			item.setUsername(item.getUsername()+"--------");
-		});
-		
-		//delete null element
-		u1.removeIf(ele -> ele == null);
-		
-		//print
-		u1.forEach(item -> {
-			System.out.println(item);
-		});*/
-		
-//		testRemoveIf();
-		
-		
-//		testListToMap();
-		
-//		testContinue();
-		
+
+		// 合并两个list并去重
+		test5();
+
+		// 过滤元素并设置默认值
+//		test4();
+
+		// 实现for循环中continue效果
+//		test3();
+
+		// 根据条件删除元素
+//		test2();
+
+		// 循环修改、打印元素
+//		test1();
 
 	}
 
-	private static void testContinue() {
-		List<String> list = Arrays.asList("123", "45634", "7892", "abch", "sdfhrthj", "mvkd");  
-		list.stream().forEach(e -> {
-		    if(e.length() >= 5){  
-		        return;  
-		    }  
-		    System.out.println(e);  
-		}); 
-		
+	private static void test5() {
+		List<User> lista = new ArrayList<>();
+		lista.add(new User("u1", "p1"));
+		lista.add(new User("u2", "p2"));
+		lista.add(new User("u3", "p3"));
+
+		List<User> listb = new ArrayList<>();
+		listb.add(new User("u3", "p3"));
+		listb.add(new User("u4", "p4"));
+
+		List<User> list = Stream.of(lista, listb).flatMap(Collection::stream).distinct().collect(Collectors.toList());
+
+
+		// 根据用户名和密码去除重复数据
+		List<User> distinctList = list.stream().collect(Collectors.collectingAndThen(
+				Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(o -> o.getUsername() + ";" + o.getPsw()))), ArrayList::new));
+
+		distinctList.forEach(System.out::println);
 	}
+
 
 	private static void testListToMap() {
 		List<String> plans = new ArrayList<String>();
@@ -67,60 +61,102 @@ public class ListTest {
 		plans.add("2020-01-09");
 		plans.add("2020-02-09");
 		plans.add("2020-03-09");
-		
+
 //		Map<String, List<String>> map = plans.stream().collect(Collectors.groupingBy(x -> x.toString().substring(0,  4), TreeMap::new, mapping));
-		
-		
+
+
 		Map<String, List<String>> map = plans.stream().collect(
-			Collectors.groupingBy(
-				x -> x.toString().substring(0,  4),
-				Collectors.mapping(x -> x.toString().substring(5, 10), Collectors.toList())
-			)
+				Collectors.groupingBy(
+						x -> x.toString().substring(0,  4),
+						Collectors.mapping(x -> x.toString().substring(5, 10), Collectors.toList())
+				)
 		);
-		
+
 		LinkedHashMap<String, List<String>> collect = map.entrySet().stream()
-			.sorted(Map.Entry.comparingByKey())
-			.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
-					(oldValue, newValue) -> oldValue, LinkedHashMap::new));
-		
+				.sorted(Map.Entry.comparingByKey())
+				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+						(oldValue, newValue) -> oldValue, LinkedHashMap::new));
+
 		collect.keySet().forEach(key -> System.out.println("map.get(" + key + ") = " + map.get(key)));
-		
+
 		/*collect.forEach(item -> {
 			System.out.println(item);
 		});*/
-		
-		
-		List<String> strings = new ArrayList<String>();
-        strings.add("typeA:code1");
-        strings.add("typeA:code2");
-        strings.add("typeA:code3");
-        strings.add("typeB:code4");
-        strings.add("typeB:code5");
-        strings.add("typeB:code6");
-        strings.add("typeC:code7");
 
-        Map<String, List<String>> result = strings.stream().collect(
-        		Collectors.groupingBy(s -> s.substring(0, s.indexOf(":")), 
-        				Collectors.mapping(s -> s.substring(s.indexOf(":")+1), Collectors.toList())));
+
+		List<String> strings = new ArrayList<String>();
+		strings.add("typeA:code1");
+		strings.add("typeA:code2");
+		strings.add("typeA:code3");
+		strings.add("typeB:code4");
+		strings.add("typeB:code5");
+		strings.add("typeB:code6");
+		strings.add("typeC:code7");
+
+		Map<String, List<String>> result = strings.stream().collect(
+				Collectors.groupingBy(s -> s.substring(0, s.indexOf(":")),
+						Collectors.mapping(s -> s.substring(s.indexOf(":")+1), Collectors.toList())));
 
        /* for (Entry<String, List<String>> entry : result.entrySet())
         {
             System.out.println(entry);
         }*/
-		
+
 	}
 
-	private static void testRemoveIf() {
-		List<User> u1 = new ArrayList<User>();
-		u1.add(new User("u1", "p1"));
-		u1.add(new User("u2", "p2"));
-		u1.add(new User("u3", "p3"));
-		u1.add(new User("u4", "p4"));
-		
-		Set<String> set = new HashSet<String>();
+	/**
+	 * 过滤元素
+	 */
+	private static void test4() {
+		List<User> list = new ArrayList<>();
+		list.add(new User("u1", "p1"));
+		list.add(new User(null, "p2"));
+		list.add(new User("u3", "p3"));
+		list.add(null);
+		list.add(new User(null, "p4"));
+
+		// 删除空元素
+		list.removeIf(ele -> ele == null);
+
+		// 姓名为空时，设置姓名为aa
+		list.stream().filter(x -> x.getUsername() == null || "".equals(x.getUsername())).forEach(x ->
+			x.setUsername("aa")
+		);
+
+		// 处理不为空的无素
+		list.stream().filter(item -> item != null).forEach(item ->
+			item.setUsername(item.getUsername() + "p")
+		);
+
+		list.forEach(System.out::println);
+	}
+
+	/**
+	 * 实现for循环中continue效果
+	 */
+	private static void test3() {
+		List<String> list = Arrays.asList("123", "123456", "12");
+		list.forEach(e -> {
+		    if(e.length() >= 5){
+		        return;
+		    }
+		    System.out.println(e);
+		}); 
+	}
+
+	/**
+	 * 根据条件删除元素
+	 */
+	private static void test2() {
+		List<User> list = new ArrayList<>();
+		list.add(new User("u1", "p1"));
+		list.add(new User("u2", "p2"));
+		list.add(new User("u3", "p3"));
+
+		Set<String> set = new HashSet<>();
 		set.add("u1");
-		set.add("u4");
-		
+		set.add("u3");
+
 		//method 1
 		/*u1.removeIf(new Predicate<User>() {
 			
@@ -130,11 +166,33 @@ public class ListTest {
 			}
 			
 		});*/
-		
+
+		// 删除空元素
+//		list.removeIf(ele -> ele == null);
+
 		//method 2
-		u1.removeIf(ele -> set.contains(ele.getUsername()));
-		
-		u1.forEach(ele -> System.out.println(ele));
+		list.removeIf(ele -> set.contains(ele.getUsername()));
+
+		list.forEach(System.out::println);
+	}
+
+	/**
+	 * 循环修改、打印元素
+	 */
+	private static void test1() {
+		List<User> list = new ArrayList<>();
+		list.add(new User("u1", "p1"));
+		list.add(new User("u2", "p2"));
+		list.add(new User("u3", "p3"));
+
+		//method 1
+		list.forEach(item -> {
+			item.setUsername(item.getUsername() + "a");
+			System.out.println(item);
+		});
+
+		//method 2
+		list.forEach(System.out::println);
 	}
 	
 }

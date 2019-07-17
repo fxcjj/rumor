@@ -14,7 +14,7 @@ import java.security.MessageDigest;
 public class MD5Test {
 
     public static void main(String[] args) throws Exception {
-        String str = "tangfuqiang";
+        String str = "hello";
         System.out.println(test1(str));
         System.out.println(test2(str));
         System.out.println(MD5Utils.md5(str));

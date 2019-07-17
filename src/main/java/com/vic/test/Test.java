@@ -8,7 +8,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
@@ -18,7 +21,7 @@ public class Test {
 	
     public static void main(String[] args) throws Exception {
     	
-        testCEF();
+//        testCEF();
         
         //testString2Byte();
         
@@ -43,11 +46,30 @@ public class Test {
 //    	int a = testTry();
 //    	System.out.println(a);
 
-    	
+    	testUrl();
     }
 
+	private static void testUrl() throws UnsupportedEncodingException {
+		/**
+		 * 编码为UTF-8，每个汉字占三个字节
+		 * 为: %E4%B8%BA
+		 * 什: %E4%BB%80
+		 * 么: %E4%B9%88
+		 * 为什么: %E4%B8%BA%E4%BB%80%E4%B9%88
+		 *
+		 * 编码为GBK，每个汉字占二个字节
+		 * 为什么: %CE%AA%CA%B2%C3%B4
+		 */
+		String originStr = "为什么";
+		String encoded = URLEncoder.encode(originStr, "GBK");
+		System.out.println(encoded);
 
-    /**
+		String decoded = URLDecoder.decode(encoded, "GBK");
+		System.out.println(decoded);
+	}
+
+
+	/**
      * 会出现这个异常
      * Exception in thread "main" java.util.ConcurrentModificationException
 	at java.util.ArrayList$Itr.checkForComodification(ArrayList.java:901)
