@@ -3,6 +3,7 @@ package com.vic.encrypt.rsa;
 import org.apache.commons.codec.binary.Base64;
 
 import javax.crypto.Cipher;
+import java.io.ByteArrayOutputStream;
 import java.security.*;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
@@ -22,7 +23,35 @@ import java.util.Map;
  * @author 罗利华
  * date: 2019/6/26 19:07
  */
-public class RSAEncrypt {
+public class RSAUtils {
+
+    public static void main(String[] args) {
+        //1. 生成公钥和私钥
+        Map<String, String> keyMap = makeKeyPair();
+
+        //2. 公钥加密、私钥解密
+        // 加密字符串
+        String message = "我是你爸爸";
+
+        String publicKey = keyMap.get(PUBLIC_KEY);
+        String privateKey = keyMap.get(PRIVATE_KEY);
+
+        System.out.println("随机生成的公钥为: " + publicKey);
+        System.out.println("随机生成的私钥为: " + privateKey);
+        String encryptStr = encrypt(message, publicKey);
+        System.out.println(message + "\t加密后的字符串为: " + encryptStr);
+
+        String decryptStr = decrypt(encryptStr, privateKey);
+        System.out.println("还原后的字符串为: " + decryptStr);
+
+        //3. 私钥签名、公钥验签
+        String sign = sign(message, privateKey);
+        System.out.println("生成的签名: " + sign);
+
+        boolean verify = verify(message, sign, publicKey);
+        System.out.println("验签结果: " + verify);
+
+    }
 
     /**
      * 默认字符集
@@ -54,40 +83,53 @@ public class RSAEncrypt {
      */
     public static final String PRIVATE_KEY = "RSAPrivateKey";
 
-    private static Map<Integer, String> keyMap = new HashMap<>();
+    /**
+     * RSA最大加密明文大小
+     */
+    private static final int MAX_ENCRYPT_BLOCK = 117;
 
-    public static void main(String[] args) {
-        //1. 生成公钥和私钥
-        genKeyPair();
+    /**
+     * RSA最大解密密文大小
+     */
+    private static final int MAX_DECRYPT_BLOCK = 128;
 
-        //2. 公钥加密、私钥解密
-        // 加密字符串
-        String message = "我是你爸爸";
 
-        String publicKey = keyMap.get(0);
-        String privateKey = keyMap.get(1);
+    /**
+     * 构造公钥
+     * @param publicKey
+     * @return
+     */
+    public static PublicKey buildPublicKey(String publicKey) {
+        try {
+            KeyFactory keyFactory = KeyFactory.getInstance(KEY_ALGORITHM);
+            byte[] encodedKey = Base64.decodeBase64(publicKey);
+            return keyFactory.generatePublic(new X509EncodedKeySpec(encodedKey));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
-        System.out.println("随机生成的公钥为: " + publicKey);
-        System.out.println("随机生成的私钥为: " + privateKey);
-        String encryptStr = encrypt(message, publicKey);
-        System.out.println(message + "\t加密后的字符串为: " + encryptStr);
-
-        String decryptStr = decrypt(encryptStr, privateKey);
-        System.out.println("还原后的字符串为: " + decryptStr);
-
-        //3. 私钥签名、公钥验签
-        String sign = sign(message, privateKey);
-        System.out.println("生成的签名: " + sign);
-
-        boolean verify = verify(message, sign, publicKey);
-        System.out.println("验签结果: " + verify);
-
+    /**
+     * 构造私钥
+     * @param privateKey
+     * @return
+     */
+    public static PrivateKey buildPrivateKey(String privateKey) {
+        try {
+            KeyFactory keyFactory = KeyFactory.getInstance(KEY_ALGORITHM);
+            byte[] encodedKey = Base64.decodeBase64(privateKey);
+            return keyFactory.generatePrivate(new PKCS8EncodedKeySpec(encodedKey));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**
      * 随机生成密钥对
      */
-    public static void genKeyPair() {
+    public static Map<String, String> makeKeyPair() {
         try {
             // KeyPairGenerator类用于生成公钥和私钥对，基于RSA算法生成对象
             KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance(KEY_ALGORITHM);
@@ -110,13 +152,16 @@ public class RSAEncrypt {
             String publicKeyString = new String(Base64.encodeBase64(publicKey.getEncoded()));
 
             // 将公钥和私钥保存到map
-            keyMap.put(0, publicKeyString); //0表示公钥
-            keyMap.put(1, privateKeyString); //0表示私钥
+            Map<String, String> keyPairMap = new HashMap<>();
+            keyPairMap.put(PUBLIC_KEY, publicKeyString); // 公钥
+            keyPairMap.put(PRIVATE_KEY, privateKeyString); // 私钥
+            return keyPairMap;
         } catch (NoSuchAlgorithmException e1) {
             e1.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return null;
     }
 
     /**
@@ -127,14 +172,30 @@ public class RSAEncrypt {
      */
     public static String encrypt(String str, String publicKey) {
         try {
-            // 将publicKey base64解码
-            byte[] decoded = Base64.decodeBase64(publicKey);
-            RSAPublicKey pubKey = (RSAPublicKey) KeyFactory.getInstance(KEY_ALGORITHM).generatePublic(new X509EncodedKeySpec(decoded));
+            PublicKey pubKey = buildPublicKey(publicKey);
             // RSA加密
             Cipher cipher = Cipher.getInstance(KEY_ALGORITHM);
             cipher.init(Cipher.ENCRYPT_MODE, pubKey);
-            String outStr = Base64.encodeBase64String(cipher.doFinal(str.getBytes("UTF-8")));
-            return outStr;
+
+            byte[] data = str.getBytes(DEFAULT_CHARSET);
+            int inputLength = data.length;
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            int offset = 0;
+            byte[] cache;
+            int i = 0;
+            while (inputLength - offset > 0) {
+                if (inputLength - offset > MAX_ENCRYPT_BLOCK) {
+                    cache = cipher.doFinal(data, offset, MAX_ENCRYPT_BLOCK);
+                } else {
+                    cache = cipher.doFinal(data, offset, inputLength - offset);
+                }
+                out.write(cache, 0, cache.length);
+                i++;
+                offset = i * MAX_ENCRYPT_BLOCK;
+            }
+            byte[] encryptedData = out.toByteArray();
+            out.close();
+            return Base64.encodeBase64String(encryptedData);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -143,7 +204,6 @@ public class RSAEncrypt {
 
     /**
      * 解密
-     *
      * @param encryptStr 加密字符串
      * @param privateKey 编码后的私钥
      * @return
@@ -152,14 +212,31 @@ public class RSAEncrypt {
     public static String decrypt(String encryptStr, String privateKey) {
         try {
             // 解码加密后的字符串
-            byte[] inputByte = Base64.decodeBase64(encryptStr.getBytes(DEFAULT_CHARSET));
-            // 解码加密后的私钥
-            byte[] decoded = Base64.decodeBase64(privateKey);
-            RSAPrivateKey priKey = (RSAPrivateKey) KeyFactory.getInstance(KEY_ALGORITHM).generatePrivate(new PKCS8EncodedKeySpec(decoded));
+            byte[] data = Base64.decodeBase64(encryptStr.getBytes(DEFAULT_CHARSET));
+            PrivateKey priKey = buildPrivateKey(privateKey);
             //RSA解密
             Cipher cipher = Cipher.getInstance(KEY_ALGORITHM);
             cipher.init(Cipher.DECRYPT_MODE, priKey);
-            String outStr = new String(cipher.doFinal(inputByte));
+            int inputLength = data.length;
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            int offset = 0;
+            byte[] cache;
+            int i = 0;
+            byte[] tmp;
+            while (inputLength - offset > 0) {
+                if (inputLength - offset > MAX_DECRYPT_BLOCK) {
+                    cache = cipher.doFinal(data, offset, MAX_DECRYPT_BLOCK);
+                } else {
+                    cache = cipher.doFinal(data, offset, inputLength - offset);
+                }
+//            out.write(cache, 0, cache.length);
+                out.write(cache);
+                i++;
+                offset = i * MAX_DECRYPT_BLOCK;
+            }
+            byte[] decryptedData = out.toByteArray();
+            out.close();
+            String outStr = new String(decryptedData);
             return outStr;
         } catch (Exception e) {
             e.printStackTrace();
@@ -175,15 +252,11 @@ public class RSAEncrypt {
      */
     public static String sign(String str, String privateKey) {
         try {
-            PKCS8EncodedKeySpec priPKCS8 = new PKCS8EncodedKeySpec(Base64.decodeBase64(privateKey));
-            KeyFactory keyFactory = KeyFactory.getInstance(KEY_ALGORITHM);
-            PrivateKey priKey = keyFactory.generatePrivate(priPKCS8);
-
+            PrivateKey priKey = buildPrivateKey(privateKey);
             Signature signature = Signature.getInstance(SIGN_ALGORITHMS);
 
             signature.initSign(priKey);
             signature.update(str.getBytes(DEFAULT_CHARSET));
-
             byte[] signed = signature.sign();
             return Base64.encodeBase64String(signed);
         } catch (Exception e) {
@@ -201,10 +274,7 @@ public class RSAEncrypt {
      */
     public static boolean verify(String str, String sign, String publicKey) {
         try {
-            //str不能明文，要base64加密传输
-            KeyFactory keyFactory = KeyFactory.getInstance(KEY_ALGORITHM);
-            byte[] encodedKey = Base64.decodeBase64(publicKey);
-            PublicKey pubKey = keyFactory.generatePublic(new X509EncodedKeySpec(encodedKey));
+            PublicKey pubKey = buildPublicKey(publicKey);
 
             Signature signature = Signature.getInstance(SIGN_ALGORITHMS);
             signature.initVerify(pubKey);
