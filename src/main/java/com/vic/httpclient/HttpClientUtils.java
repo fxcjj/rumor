@@ -26,6 +26,8 @@ import java.util.Map;
  * https://blog.csdn.net/N199109/article/details/23463527
  * https://blog.csdn.net/yitian_66/article/details/80512253
  * https://blog.csdn.net/jtf8525140/article/details/77862069
+ *
+ * TODO connection pool
  * @author 罗利华
  * date: 2019/7/23 15:11
  */
@@ -42,9 +44,26 @@ public class HttpClientUtils {
 
     public static void main(String[] args) throws Exception {
 
+        // login
         String token = testLogin();
 
+        // invoke the method with CheckToken annotation
+        beam(token);
 
+        // invoke the method without CheckToken annotation
+        khan();
+
+        System.exit(0);
+    }
+
+    private static void khan() {
+        String httpUrl = "http://localhost:1236/user/khan";
+
+        String result = sendGet(httpUrl);
+        System.out.println(result);
+    }
+
+    private static void beam(String token) {
         String httpUrl = "http://localhost:1236/user/beam";
 
         Map<String, String> headerMap = new HashMap<>();
@@ -52,8 +71,6 @@ public class HttpClientUtils {
 
         String result = sendGet(httpUrl, headerMap);
         System.out.println(result);
-
-        System.exit(0);
     }
 
     private static String testLogin() {
@@ -109,6 +126,7 @@ public class HttpClientUtils {
     /**
      * 发送post请求
      * @param httpUrl
+     * @param headerMap 请求头
      * @param param 参数key/value
      * @return
      */
@@ -151,6 +169,7 @@ public class HttpClientUtils {
         CloseableHttpResponse response = null;
         String responseContent = null;
         try {
+
             // 创建默认的httpClient实例
             httpClient = HttpClients.createDefault();
             httpPost.setConfig(requestConfig);
@@ -181,6 +200,16 @@ public class HttpClientUtils {
     /**
      * 发送get请求
      * @param httpUrl
+     * @return
+     */
+    public static String sendGet(String httpUrl) {
+        return sendGet(httpUrl, null);
+    }
+
+    /**
+     * 发送get请求
+     * @param httpUrl
+     * @param headerMap 请求头
      * @return json格式
      */
     public static String sendGet(String httpUrl, Map<String, String> headerMap) {
