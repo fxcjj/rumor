@@ -2,6 +2,7 @@ package com.vic.httpclient;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.config.RequestConfig;
@@ -12,6 +13,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
@@ -26,6 +28,7 @@ import java.util.Map;
  * https://blog.csdn.net/N199109/article/details/23463527
  * https://blog.csdn.net/yitian_66/article/details/80512253
  * https://blog.csdn.net/jtf8525140/article/details/77862069
+ * https://www.cnblogs.com/visec479/p/4820968.html
  *
  * TODO connection pool
  * @author 罗利华
@@ -145,9 +148,7 @@ public class HttpClientUtils {
         httpPost.addHeader("Accept", "application/json");
 //        httpPost.addHeader("Content-Type", "application/json");
         if (headerMap != null) {
-            for (String str : headerMap.keySet()) {
-                httpPost.addHeader(str, headerMap.get(str));
-            }
+            httpPost.setHeaders(assemblyHeader(headerMap));
         }
 
         try {
@@ -219,10 +220,8 @@ public class HttpClientUtils {
         httpGet.addHeader("Connection", "keep-alive");
         httpGet.addHeader("Accept", "application/json");
 //        httpGet.addHeader("Content-Type", "application/json");
-        if (headerMap != null) {
-            for (String str : headerMap.keySet()) {
-                httpGet.addHeader(str, headerMap.get(str));
-            }
+        if(headerMap != null) {
+            httpGet.setHeaders(assemblyHeader(headerMap));
         }
         return sendGet(httpGet);
     }
@@ -261,6 +260,21 @@ public class HttpClientUtils {
             }
         }
         return responseContent;
+    }
+
+    /**
+     * 组装头部信息
+     * @param headers
+     * @return
+     */
+    public static Header[] assemblyHeader(Map<String, String> headers) {
+        Header[] allHeader = new Header[headers.size()];
+        int i = 0;
+        for(String h : headers.keySet()) {
+            allHeader[i] = new BasicHeader(h, headers.get(h));
+            i++;
+        }
+        return allHeader;
     }
 
 }

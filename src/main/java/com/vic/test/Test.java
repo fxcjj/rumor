@@ -16,11 +16,19 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
 
-public class Test {
+public class  Test {
 
 	
     public static void main(String[] args) throws Exception {
-    	
+
+//		int i = 999;
+//		i--;
+//		++i;
+//		System.out.println(i++);
+//		System.out.println(i);
+
+
+
 //        testCEF();
         
         //testString2Byte();
@@ -46,8 +54,39 @@ public class Test {
 //    	int a = testTry();
 //    	System.out.println(a);
 
-    	testUrl();
-    }
+//    	testUrl();
+
+		System.out.println(test());
+	}
+
+	private static int test() {
+		try {
+			int a = 3/0;
+		} catch (Exception e) {
+			//1. main方法打印1
+			/**
+			 * java.lang.ArithmeticException: / by zero
+			 * 	at com.vic.test.Test.test(Test.java:65)
+			 * 	at com.vic.test.Test.main(Test.java:60)
+			 */
+			e.printStackTrace();
+
+			//2. main方法打印1
+			/**
+			 * / by zero
+			 */
+//			System.out.println(e.getMessage());
+
+			//3. main不打印
+			/**
+			 * Exception in thread "main" java.lang.ArithmeticException: / by zero
+			 * 	at com.vic.test.Test.test(Test.java:65)
+			 * 	at com.vic.test.Test.main(Test.java:60)
+			 */
+//			throw e;
+		}
+		return 1;
+	}
 
 	private static void testUrl() throws UnsupportedEncodingException {
 		/**
