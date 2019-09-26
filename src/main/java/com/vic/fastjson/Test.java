@@ -109,6 +109,11 @@ public abstract class Test {
 //		System.out.println(jsonStr);
 
 
+		HashMap maps = JSON.parseObject(jsonStr, HashMap.class);
+		System.out.println(maps.get("id"));
+		System.out.println(maps.get("name"));
+		System.out.println(maps.get("create_time"));
+
 
 	}
 
