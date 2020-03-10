@@ -5,16 +5,26 @@ import java.net.URI;
 
 /**
  * 八
- * File测试
- * 
+ * File类测试
+ * https://www.cnblogs.com/cainiao-chuanqi/p/11326624.html
+ * https://www.cnblogs.com/black-mcy/p/10060333.html
  * @author Victor
  */
 public class FileTest {
     public static void main(String[] args) throws Exception {
-        //testDir();
-        //testFile();
-        testURI();
+
+        testTempFile();
+
+//        testDir();
+//        testFile();
+//        testURI();
         
+    }
+
+    private static void testTempFile() {
+
+        File f = new File("temp", ".tmp");
+
     }
 
     //URI方式创建目录及文件
@@ -33,7 +43,7 @@ public class FileTest {
     //创建文件
     private static void testFile() throws Exception {
         File file = new File("d:/coupling/pore/a.txt");
-        file.createNewFile();
+//        file.createNewFile();
         
         String absolutePath = file.getAbsolutePath();
         String name = file.getName();
@@ -52,7 +62,7 @@ public class FileTest {
     private static void testDir() {
         //创建子目录pore，若coupling父目录不存在，则fail
         File dir = new File("d:/coupling/pore");
-        //dir.mkdir(); //此方法不行！
+//        dir.mkdir(); //此方法不行！
         dir.mkdirs(); //此方法可以！
         
         String absolutePath = dir.getAbsolutePath();

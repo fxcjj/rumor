@@ -21,6 +21,14 @@
 
   <dependencies>
 
+    <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.10</version>
+      <scope>provided</scope>
+    </dependency>
+
     <dependency>
       <groupId>org.apache.poi</groupId>
       <artifactId>poi</artifactId>
@@ -71,12 +79,20 @@
     <!-- fastjson end -->
 
     <!-- httpcomponents start -->
-    <dependency>
+    <!--<dependency>
       <groupId>org.apache.httpcomponents</groupId>
       <artifactId>httpclient</artifactId>
       <version>4.5.3</version>
+    </dependency>-->
+
+    <!-- 引入httpmine即可，包含了httpclient,httpcore -->
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpmime</artifactId>
+      <version>4.5.10</version>
     </dependency>
-    <!-- httpcomponents start -->
+
+    <!-- httpcomponents end -->
 
     <dependency>
       <groupId>cglib</groupId>
