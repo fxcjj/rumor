@@ -5,7 +5,7 @@ package com.vic.java8.functionalinterface;
  * https://www.cnblogs.com/runningTurtle/p/7092632.html
  * https://www.jianshu.com/p/52cdc402fb5d
  *
- * 1. @FunctionInterface主要用于编译级错误检查
+ * 1. @FunctionInterface主要用于编译级错误检查，加上该注解，当你写的接口不符合函数式接口定义的时候，编译器会报错
  * 2. 加不加@FunctionalInterface对于接口是不是函数式接口没有影响，该注解只是提醒编译器去检查该接口是否仅包含一个抽象方法
  *
  * @author 罗利华
