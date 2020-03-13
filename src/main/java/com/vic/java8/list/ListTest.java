@@ -11,8 +11,11 @@ public class ListTest {
 	
 	public static void main(String[] args) {
 
+		// 从对象集合中取出某个字段的集合
+		test7();
+
 		// 去重List<Long>
-		test6();
+//		test6();
 
 		// 合并两个list并去重
 //		test5();
@@ -31,6 +34,17 @@ public class ListTest {
 
 	}
 
+	private static void test7() {
+		List<User> lista = new ArrayList<>();
+		lista.add(new User("u1", "p1"));
+		lista.add(new User("u2", "p2"));
+		lista.add(new User("u3", "p3"));
+
+		List<String> names = lista.stream().map(p -> p.getUsername()).collect(Collectors.toList());
+		names.forEach(System.out::println);
+
+	}
+
 	private static void test6() {
 		List<Long> list = new ArrayList<>();
 		list.add(1L);
@@ -38,8 +52,8 @@ public class ListTest {
 		list.add(138L);
 		list.add(138L);
 		list.add(187L);
-		List<Long> distinctElements = list.stream().distinct().collect(Collectors.toList());
-		distinctElements.forEach(System.out::println);
+		list = list.stream().distinct().collect(Collectors.toList());
+		list.forEach(System.out::println);
 	}
 
 	private static void test5() {
