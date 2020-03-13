@@ -11,8 +11,11 @@ public class ListTest {
 	
 	public static void main(String[] args) {
 
+		// 去重List<Long>
+		test6();
+
 		// 合并两个list并去重
-		test5();
+//		test5();
 
 		// 过滤元素并设置默认值
 //		test4();
@@ -26,6 +29,17 @@ public class ListTest {
 		// 循环修改、打印元素
 //		test1();
 
+	}
+
+	private static void test6() {
+		List<Long> list = new ArrayList<>();
+		list.add(1L);
+		list.add(187L);
+		list.add(138L);
+		list.add(138L);
+		list.add(187L);
+		List<Long> distinctElements = list.stream().distinct().collect(Collectors.toList());
+		distinctElements.forEach(System.out::println);
 	}
 
 	private static void test5() {
