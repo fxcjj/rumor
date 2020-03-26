@@ -17,18 +17,8 @@ import java.util.stream.Stream;
 public class FileUtils {
 
     public static void main(String[] args) throws InterruptedException {
-
-        List<Long> ids = new ArrayList<>();
-        ids.add(1L);
-        ids.add(1L);
-        ids.add(2L);
-        ids.add(345678L);
-        ids.add(777L);
-        ids.add(777L);
-
-        List<Long> collect = ids.stream().distinct().collect(Collectors.toList());
-
-        System.out.println(collect);
+//        String imageUrl = "http://waterelephant.oss-cn-shanghai.aliyuncs.com/upload/backend/2019-05-05/30_01.png";
+//        System.out.println(getBase64StrFromUrl(imageUrl));
 
 //        testDeleteFile();
     }
@@ -170,8 +160,4 @@ public class FileUtils {
         return base64Str;
     }
 
-//    public static void main(String[] args) {
-//        String imageUrl = "http://waterelephant.oss-cn-shanghai.aliyuncs.com/upload/backend/2019-05-05/30_01.png";
-//        System.out.println(getBase64StrFromUrl(imageUrl));
-//    }
 }

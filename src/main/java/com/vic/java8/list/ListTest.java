@@ -41,7 +41,9 @@ public class ListTest {
 		lista.add(new User("u3", "p3"));
 
 		List<String> names = lista.stream().map(p -> p.getUsername()).collect(Collectors.toList());
+		List<String> names1 = lista.stream().map(User::getUsername).collect(Collectors.toList());
 		names.forEach(System.out::println);
+		names1.forEach(System.out::println);
 
 	}
 
