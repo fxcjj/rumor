@@ -5,6 +5,10 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * https://juejin.im/post/5d5789d26fb9a06ad0056bd9
+ *
+ */
 //public class Test<W extends String> {
 public class Test<W> {
 	W value;
@@ -17,7 +21,7 @@ public class Test<W> {
 		Test<String> t = new Test<String>();
 		Class<? extends Test> clazz = t.getClass();
 		
-//		System.out.println(clazz.getName());
+		System.out.println(clazz.getName());
 		
 		Field[] fields = clazz.getDeclaredFields();
 		for(Field f : fields) {
@@ -25,7 +29,7 @@ public class Test<W> {
 			 * 在泛型类被类型擦除的时候，如果类型参数未指定上限，则会把<W>转译为Object类型。
 			 * 如果指定了上限，如<W extends String>则会转换为上限类型,即String.
 			 */
-			System.out.println(f);
+			System.out.println("field: " + f);
 		}
 		
 		Method[] methods = clazz.getDeclaredMethods();
@@ -34,7 +38,7 @@ public class Test<W> {
 			 * public static void cn.rumor.base.generic.Test.main(java.lang.String[])
 				public void cn.rumor.base.generic.Test.add(java.lang.Object)
 			 */
-			System.out.println(m);
+			System.out.println("method: " + m);
 		}
 		
 		

@@ -37,8 +37,8 @@ import java.util.Map;
 public class HttpClientUtils {
 
     private static RequestConfig requestConfig = RequestConfig.custom()
-            .setSocketTimeout(15000)
-            .setConnectTimeout(15000)
+            .setSocketTimeout(15000) //传输时间
+            .setConnectTimeout(15000) //建立链接时间
             .setConnectionRequestTimeout(15000)
             .build();
 
@@ -146,7 +146,7 @@ public class HttpClientUtils {
         // 添加请求头信息
         httpPost.addHeader("Connection", "keep-alive");
         httpPost.addHeader("Accept", "application/json");
-//        httpPost.addHeader("Content-Type", "application/json");
+        httpPost.addHeader("Content-Type", "application/json");
         if (headerMap != null) {
             httpPost.setHeaders(assemblyHeader(headerMap));
         }

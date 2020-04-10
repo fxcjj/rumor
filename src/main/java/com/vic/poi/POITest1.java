@@ -22,11 +22,12 @@ public class POITest1 {
 
     public static void main(String[] args) throws Exception {
 
+        createExcel1();
         // 创建excel
 //        createExcel();
 
         // 读取excel
-        readExcel();
+//        readExcel();
 
     }
 
@@ -147,6 +148,36 @@ public class POITest1 {
 
 
         workbook.setActiveSheet(0);
+        workbook.write(fos);
+        fos.close();
+
+    }
+
+
+    /**
+     * 创建excel
+     */
+    private static void createExcel1() throws Exception {
+
+        // 获取桌面
+        FileSystemView fsv = FileSystemView.getFileSystemView();
+        //C:\Users\Victor\Desktop
+        String desktop = fsv.getHomeDirectory().getPath();
+        String filePath = desktop + "/hello.xls";
+
+        File file = new File(filePath);
+        FileOutputStream fos = new FileOutputStream(file);
+
+        // 创建工作簿
+        HSSFWorkbook workbook = new HSSFWorkbook();
+        // 创建工作表
+        HSSFSheet beverly1 = workbook.createSheet("sheet1");
+
+        // 创建第一行
+        for(int i = 0; i < 3; i++) {
+            beverly1.createRow(i).createCell(0).setCellValue("你好" + (i + 1));
+        }
+
         workbook.write(fos);
         fos.close();
 
