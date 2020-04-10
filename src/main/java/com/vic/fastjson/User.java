@@ -1,13 +1,19 @@
 package com.vic.fastjson;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.util.Date;
 
 public class User {
 
 	private Integer id;
-	
+
+	/**
+	 * 加了此注解，此字段不参与序列化（不会打印出来）
+	 */
+	@JSONField(serialize = false)
 	private String name;
-	
+
 	private Date create_time;
 	
 	public Date getCreate_time() {

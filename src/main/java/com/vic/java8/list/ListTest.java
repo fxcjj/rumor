@@ -11,8 +11,14 @@ public class ListTest {
 	
 	public static void main(String[] args) {
 
+		// 从对象集合中取出某个字段的集合
+		test7();
+
+		// 去重List<Long>
+//		test6();
+
 		// 合并两个list并去重
-		test5();
+//		test5();
 
 		// 过滤元素并设置默认值
 //		test4();
@@ -26,6 +32,30 @@ public class ListTest {
 		// 循环修改、打印元素
 //		test1();
 
+	}
+
+	private static void test7() {
+		List<User> lista = new ArrayList<>();
+		lista.add(new User("u1", "p1"));
+		lista.add(new User("u2", "p2"));
+		lista.add(new User("u3", "p3"));
+
+		List<String> names = lista.stream().map(p -> p.getUsername()).collect(Collectors.toList());
+		List<String> names1 = lista.stream().map(User::getUsername).collect(Collectors.toList());
+		names.forEach(System.out::println);
+		names1.forEach(System.out::println);
+
+	}
+
+	private static void test6() {
+		List<Long> list = new ArrayList<>();
+		list.add(1L);
+		list.add(187L);
+		list.add(138L);
+		list.add(138L);
+		list.add(187L);
+		list = list.stream().distinct().collect(Collectors.toList());
+		list.forEach(System.out::println);
 	}
 
 	private static void test5() {

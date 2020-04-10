@@ -45,7 +45,7 @@ public class PriceFactory {
      */
     private void initCalcPriceList() throws ClassNotFoundException {
         String path = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + SCAN_PACKAGE.replace(".", File.separator) + File.separator;
-        // D:\github\rumor\src\main\java\com\vic\designpattern\strategy\v3\
+        // D:\github\rumor \src\main\java\com\vic\designpattern\strategy\v3\
 //        System.out.println("path:" + path);
         File file = new File(path);
         String[] list = file.list();

@@ -1,4 +1,4 @@
-package com.vic.java8.lambdastream;
+package com.vic.java8.stream;
 
 
 import com.vic.entity.User;
