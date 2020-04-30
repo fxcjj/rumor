@@ -11,7 +11,7 @@ public class User {
 	/**
 	 * 加了此注解，此字段不参与序列化（不会打印出来）
 	 */
-	@JSONField(serialize = false)
+//	@JSONField(serialize = false)
 	private String name;
 
 	private Date create_time;

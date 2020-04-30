@@ -38,9 +38,9 @@ import java.util.*;
 public class HttpClientUtils {
 
     private static RequestConfig requestConfig = RequestConfig.custom()
-            .setSocketTimeout(15000) //传输时间
-            .setConnectTimeout(15000) //建立链接时间
-            .setConnectionRequestTimeout(15000)
+            .setSocketTimeout(50000)
+            .setConnectTimeout(50000)
+            .setConnectionRequestTimeout(50000)
             .build();
 
     private HttpClientUtils() {
@@ -214,7 +214,7 @@ public class HttpClientUtils {
      * @param paramMap 参数key/value
      * @return
      */
-    public static String sendPost(String httpUrl, Map<String, String> headerMap, Map<String, String> paramMap) {
+    public static String sendPost1(String httpUrl, Map<String, String> headerMap, Map<String, String> paramMap) {
         HttpPost httpPost = new HttpPost(httpUrl); // 创建httpPost
 
         if (headerMap != null && !headerMap.isEmpty()) {
@@ -230,16 +230,41 @@ public class HttpClientUtils {
         }
 
         // 添加请求头信息
-        httpPost.addHeader("Connection", "keep-alive");
-        httpPost.addHeader("Accept", "application/json");
-        httpPost.addHeader("Content-Type", "application/json");
-        if (headerMap != null) {
+//        httpPost.addHeader("Connection", "keep-alive");
+        // 希望服务器返回json格式
+//        httpPost.addHeader("Accept", "application/json");
+        // 请求格式设置为json
+//        httpPost.addHeader("Content-Type", "application/json");
+        try {
+            // UrlEncodedFormEntity表示request-body
+//            httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs, Consts.UTF_8));
+
+            UrlEncodedFormEntity urlEncodedFormEntity = new UrlEncodedFormEntity(nameValuePairs, Consts.UTF_8);
+//            urlEncodedFormEntity.setContentType("application/json");
+            httpPost.setEntity(urlEncodedFormEntity);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return sendPost(httpPost);
+    }
+    public static String sendPost(String httpUrl, Map<String, String> headerMap, Map<String, String> paramMap) {
+        HttpPost httpPost = new HttpPost(httpUrl);
+
+        // headers
+        if (headerMap != null && !headerMap.isEmpty()) {
             httpPost.setHeaders(assemblyHeader(headerMap));
         }
 
+        // 创建参数队列
+        List<NameValuePair> nameValuePairs = new ArrayList<>();
+        if(paramMap != null) {
+            for (String key : paramMap.keySet()) {
+                nameValuePairs.add(new BasicNameValuePair(key, paramMap.get(key)));
+            }
+        }
         try {
-            // UrlEncodedFormEntity表示request-body
-            httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs, Consts.UTF_8));
+            UrlEncodedFormEntity urlEncodedFormEntity = new UrlEncodedFormEntity(nameValuePairs, Consts.UTF_8);
+            httpPost.setEntity(urlEncodedFormEntity);
         } catch (Exception e) {
             e.printStackTrace();
         }

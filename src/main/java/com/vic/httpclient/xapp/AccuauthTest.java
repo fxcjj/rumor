@@ -38,68 +38,6 @@ public class AccuauthTest {
 
 
     public static void main(String[] args) throws Exception {
-        Properties properties = System.getProperties();
-        Enumeration<?> enumeration = properties.propertyNames();
-        while(enumeration.hasMoreElements()) {
-            System.out.println(enumeration.nextElement());
-        }
-        /*
-        java.runtime.name
-        sun.boot.library.path
-        java.vm.version
-        java.vm.vendor
-        java.vendor.url
-        path.separator
-        java.vm.name
-        file.encoding.pkg
-        user.script
-        user.country
-        sun.java.launcher
-        sun.os.patch.level
-        java.vm.specification.name
-        user.dir
-        java.runtime.version
-        java.awt.graphicsenv
-        java.endorsed.dirs
-        os.arch
-        java.io.tmpdir
-        line.separator
-        java.vm.specification.vendor
-        user.variant
-        os.name
-        sun.jnu.encoding
-        java.library.path
-        java.specification.name
-        java.class.version
-        sun.management.compiler
-        os.version
-        user.home
-        user.timezone
-        java.awt.printerjob
-        file.encoding
-        java.specification.version
-        user.name
-        java.class.path
-        java.vm.specification.version
-        sun.arch.data.model
-        java.home
-        sun.java.command
-        java.specification.vendor
-        user.language
-        awt.toolkit
-        java.vm.info
-        java.version
-        java.ext.dirs
-        sun.boot.class.path
-        java.vendor
-        file.separator
-        java.vendor.url.bug
-        sun.cpu.endian
-        sun.io.unicode.encoding
-        sun.desktop
-        sun.cpu.isalist
-         */
-//        System.out.println(System.getProperty("user.dir"));
 
         /*
         accuauth.api-id: ebeacf7f79fe48adaa1b9e0d39e60ee1
@@ -120,7 +58,7 @@ public class AccuauthTest {
 //        System.out.println(FileUtils.fileToBase64(imageUrl));
 
 //        testLivenessAntiHack2_ok();
-//        testLivenessAntiHack();
+        testLivenessAntiHack();
 
 //        testFace();
 
@@ -130,8 +68,56 @@ public class AccuauthTest {
 
 //        testMask();
 
-
+//        testOcrWithMask();
+//        testVerifyAd();
+//        testVerifyPan();
     }
+
+    private static void testVerifyAd() {
+        String url = "https://cloudapi.accuauth.com/verify/indian_aadhaar";
+
+        Map<String, String> headerMap = new HashMap<>();
+        headerMap.put("X-DF-API-ID", "ebeacf7f79fe48adaa1b9e0d39e60ee1");
+        headerMap.put("X-DF-API-SECRET", "e073a6b8a4da433d923868ea582b0052");
+
+        Map<String, String> map = new HashMap<>();
+        map.put("aadhaar_no", "343098467001");
+
+        long startTime = System.currentTimeMillis();
+        String result = HttpClientUtils.sendPost(url, headerMap, map);
+        System.out.println("result: " + result);
+        System.out.println("elapsed time: " + (System.currentTimeMillis() - startTime));
+    }
+
+    private static void testVerifyPan() {
+        String url = "https://cloudapi.accuauth.com/verify/indian_pan";
+
+        Map<String, String> headerMap = new HashMap<>();
+        headerMap.put("X-DF-API-ID", "ebeacf7f79fe48adaa1b9e0d39e60ee1");
+        headerMap.put("X-DF-API-SECRET", "e073a6b8a4da433d923868ea582b0052");
+
+        Map<String, String> map = new HashMap<>();
+        map.put("pan", "EHJPM9082E");
+
+        // 识别并返回打码图片
+        long startTime = System.currentTimeMillis();
+        String result = HttpClientUtils.sendPost(url, headerMap, map);
+        System.out.println("result: " + result);
+        System.out.println("elapsed time: " + (System.currentTimeMillis() - startTime));
+    }
+
+
+    private static void testOcrWithMask() {
+        String url = "https://cloudapi.accuauth.com/ocr/indian_card_with_mask";
+
+        // 识别并返回打码图片
+        Map<String, String> map = new HashMap<>();
+        map.put("image_base64", FileUtils.fileToBase64("D:\\work\\flashrupee-product\\ad-front.jpg"));
+        long startTime = System.currentTimeMillis();
+        String result = HttpClientUtils.sendPost(url, headerMap, map);
+        System.out.println("elapsed time: " + (System.currentTimeMillis() - startTime));
+    }
+
 
     private static void testMask() {
         String url = "https://cloudapi.accuauth.com/ocr/mask_indian_card";
@@ -156,7 +142,7 @@ public class AccuauthTest {
 //        File frontImage = FileUtils.getFileByUrl("http://waterelephant.oss-cn-shanghai.aliyuncs.com/upload/backend/2020-01-05/61_3_03.jpg", "jpg");
 //        System.out.println(frontImage.getName());
 
-//        File file = new File("D:\\work\\india-product\\accuauth\\c395443a02684dc08499ff07ba623c56");
+//        File file = new File("D:\\work\\flashrupee-product\\accuauth\\c395443a02684dc08499ff07ba623c56");
         File file = new File("D:\\work\\india-product\\accuauth\\aaaa");
 
         multipartMap.put("liveness_data_file", new FileBody(file, ContentType.IMAGE_JPEG, file.getName()));
@@ -214,15 +200,15 @@ public class AccuauthTest {
         headerMap.put("X-DF-API-SECRET", "e073a6b8a4da433d923868ea582b0052");
 
 
-        String aa = "D:\\work\\india-product\\aadhaar-front1.jpg";
-        String bb = "D:\\work\\india-product\\aadhaar-face.png";
+        String aa = "D:\\work\\online-issue\\图片相关\\196121_3_03.jpg";
+        String bb = "D:\\work\\online-issue\\图片相关\\196121_86_01.jpg";
 
         Map<String, String> paramMap = new HashMap<>();
         paramMap.put("image_base64_1", FileUtils.fileToBase64(aa));
         paramMap.put("image_base64_2", FileUtils.fileToBase64(bb));
-
+        long startTime = System.currentTimeMillis();
         String result = HttpClientUtils.sendPost(url, headerMap, paramMap);
-
+        System.out.println("elapsed time: " + (System.currentTimeMillis() - startTime));
         System.out.println("result:" + result);
 
         /*
