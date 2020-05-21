@@ -1,7 +1,7 @@
 package com.vic.concurrency.a;
 /**
  * 三个线程各自卖票，线程是独立的，
- * 不会受其他线程影响，so，这是安全的
+ * 不会受其他线程影响，so，这是线程安全的
  * 
  * @author Victor
 */
