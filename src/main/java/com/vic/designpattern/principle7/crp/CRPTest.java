@@ -1,6 +1,4 @@
-package com.vic.designpattern.principle.crp;
-
-import javax.smartcardio.Card;
+package com.vic.designpattern.principle7.crp;
 
 /**
  * 10 合成复用原则（Composite Reuse Principle, CRP）,又称作：组合/聚合复用原则（Composite/Aggregate Reuse Principle, CARP）

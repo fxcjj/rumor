@@ -1,4 +1,4 @@
-package com.vic.designpattern.principle.dip;
+package com.vic.designpattern.principle7.dip;
 
 /**
  * 6 依赖倒置原则
@@ -9,7 +9,7 @@ package com.vic.designpattern.principle.dip;
 public class Test {
     public static void main(String[] args) {
         Customer wang = new Customer();
-        wang.shopping(new ShopA()); //
+        wang.shopping(new ShopA());
         wang.shopping(new ShopB());
     }
 }

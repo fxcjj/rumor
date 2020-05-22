@@ -1,4 +1,4 @@
-package com.vic.designpattern.principle.lsp;
+package com.vic.designpattern.principle7.lsp;
 
 /**
  * 动物

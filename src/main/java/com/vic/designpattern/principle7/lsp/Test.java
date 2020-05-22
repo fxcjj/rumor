@@ -1,4 +1,4 @@
-package com.vic.designpattern.principle.lsp;
+package com.vic.designpattern.principle7.lsp;
 
 /**
  * 5 里氏替换原则（Liskov Substitution Principle）
