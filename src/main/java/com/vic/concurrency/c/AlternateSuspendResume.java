@@ -7,11 +7,17 @@ public class AlternateSuspendResume implements Runnable {
 	
 	private volatile int firstVal;
 	private volatile int secondVal;
-	//增加标志位，用来实现线程的挂起和恢复
-	//使用volatile保证了共享变量的可见性！
+
+	/**
+	 * 增加标志位，用来实现线程的挂起和恢复
+	 * 使用volatile保证了共享变量的可见性！
+	 */
 	private volatile boolean suspended;
-	
-	//判断两者是否相等
+
+	/**
+	 * 判断两者是否相等
+	 * @return
+	 */
 	public boolean areValuesEqual() {
 		return firstVal == secondVal;
 	}
@@ -32,7 +38,7 @@ public class AlternateSuspendResume implements Runnable {
 		int val = 1;
 		while(true) {
 			
-			//仅当线程挂起时才执行
+			// 仅当线程挂起时才执行
 			waitWhileSuspended();
 			
 			stepOne(val);
@@ -41,7 +47,7 @@ public class AlternateSuspendResume implements Runnable {
 			
 			Thread.sleep(200);
 			
-			//仅当线程挂起时才执行
+			// 仅当线程挂起时才执行
 			waitWhileSuspended();
 		}
 	}
@@ -62,7 +68,10 @@ public class AlternateSuspendResume implements Runnable {
 	public void resumeRequest() {
 		suspended = false;
 	}
-	
+
+	/**
+	 * 当前线程挂起（suspended为true）时，每隔200毫秒检查一次（sleep时不释放monitor）
+	 */
 	public void waitWhileSuspended() throws InterruptedException {
 		//这是一个“繁忙等待”技术的示例。  
         //它是非等待条件改变的最佳途径，因为它会不断请求处理器周期地执行检查，   
@@ -80,18 +89,21 @@ public class AlternateSuspendResume implements Runnable {
 		//休眠1秒，让其他线程有机会获得执行
 		try {
 			Thread.sleep(1000);
-		} catch (InterruptedException e) { }
+		} catch (InterruptedException e) {
+		}
 		
 		for(int i = 0; i < 10; i++) {
 			asr.suspendRequest();
 			
-			/**让线程有机会注意到挂起请求
-				注意：这里休眠时间一定要大于stepOne操作对firstVal赋值后的休眠时间，即300ms,
-				目的是为了防止在执行asr.areValuesEqual()进行比较时，恰逢stepOne操作执行完，而stepTwo操作还没执行
+			/**
+			 * 让线程有机会注意到挂起请求
+			 * 注意：这里休眠时间一定要大于stepOne操作对firstVal赋值后的休眠时间，即300ms,
+			 * 目的是为了防止在执行asr.areValuesEqual()进行比较时，恰逢stepOne操作执行完，而stepTwo操作还没执行
 			 */
 			try {
 				Thread.sleep(450);
-			} catch (InterruptedException e) { }
+			} catch (InterruptedException e) {
+			}
 			
 			System.out.println("asr.areValuesEqual() = " + asr.areValuesEqual());
 			
@@ -103,8 +115,9 @@ public class AlternateSuspendResume implements Runnable {
             } catch ( InterruptedException x ) {  
             }  
 		}
-		
-		System.exit(0); //中断应用程序
+
+		//中断应用程序
+		System.exit(0);
 	}
 
 }
