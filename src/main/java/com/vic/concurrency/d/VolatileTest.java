@@ -4,6 +4,9 @@ import java.util.concurrent.CountDownLatch;
 
 /**
  * volatile自增运算测试
+ *
+ * 参考
+ * 第12章 java内存模型与线程
  * @author 罗利华
  * date: 2020/5/25 17:21
  */
@@ -12,7 +15,7 @@ public class VolatileTest {
     public static volatile int race = 0;
 
     /**
-     * // 多个线程到这里是正确的，但是由于后面指令执行加1操作时，发生线程切换，那么其它线程读取到的值是过期的
+     * // 多个线程到这里是正确的，但是由于后面指令执行加1操作时，可能发生线程切换，那么其它线程读取到的值是过期的
      * 0 getstatic #2 <com/vic/concurrency/d/VolatileTest.race>
      * 3 iconst_1
      * 4 iadd

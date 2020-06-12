@@ -108,7 +108,7 @@ public class Volatile implements Runnable {
 	}
 	
 	public static void main(String[] args) {
-		try {  
+		try {
             //通过该构造函数可以获取实时时钟的当前时间  
             Volatile vol = new Volatile();  
   
