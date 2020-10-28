@@ -174,7 +174,6 @@ public class HttpClientUtils {
         try {
             //设置参数
             StringEntity stringEntity = new StringEntity(jsonStr, ContentType.APPLICATION_JSON);
-            stringEntity.setContentType("application/json");
             httpPost.setEntity(stringEntity);
         } catch (Exception e) {
             e.printStackTrace();
