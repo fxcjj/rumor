@@ -2,6 +2,7 @@ package com.vic.java8.list;
 
 
 import com.vic.entity.User;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -10,9 +11,14 @@ import java.util.stream.Stream;
 public class ListTest {
 	
 	public static void main(String[] args) {
+		// 测试交集、并集
+//		test9();
+
+		// 测试groupingBy分组
+		test8();
 
 		// 从对象集合中取出某个字段的集合
-		test7();
+//		test7();
 
 		// 去重List<Long>
 //		test6();
@@ -31,6 +37,62 @@ public class ListTest {
 
 		// 循环修改、打印元素
 //		test1();
+
+	}
+
+	private static void test9() {
+		List<String> list1 = new ArrayList<>();
+		list1.add("1");
+		list1.add("2");
+		list1.add("3");
+		list1.add("4");
+		list1.add("5");
+
+		List<String> list2 = new ArrayList<>();
+		list2.add("2");
+		list2.add("3");
+		list2.add("6");
+		list2.add("7");
+
+		// 交集
+		List<String> intersection = list1.stream().filter(item -> list2.contains(item)).collect(Collectors.toList());
+		System.out.println("---交集 intersection---");
+		intersection.parallelStream().forEach(System.out::println);
+
+		// 差集 (list1 - list2)
+		List<String> reduce1 = list1.stream().filter(item -> !list2.contains(item)).collect(Collectors.toList());
+		System.out.println("---差集 reduce1 (list1 - list2)---");
+		reduce1.parallelStream().forEach(System.out::println);
+
+		// 差集 (list2 - list1)
+		List<String> reduce2 = list2.stream().filter(item -> !list1.contains(item)).collect(Collectors.toList());
+		System.out.println("---差集 reduce2 (list2 - list1)---");
+		reduce2.parallelStream().forEach(System.out::println);
+
+		// 并集
+		List<String> listAll = list1.parallelStream().collect(Collectors.toList());
+		List<String> listAll2 = list2.parallelStream().collect(Collectors.toList());
+		listAll.addAll(listAll2);
+		System.out.println("---并集 listAll---");
+		listAll.parallelStream().forEachOrdered(System.out::println);
+
+		// 去重并集
+		List<String> listAllDistinct = listAll.stream().distinct().collect(Collectors.toList());
+		System.out.println("---得到去重并集 listAllDistinct---");
+		listAllDistinct.parallelStream().forEachOrdered(System.out::println);
+	}
+
+	private static void test8() {
+		List<Employee> list = new ArrayList<>();
+		list.add(new Employee("victor", "Tech"));
+		list.add(new Employee("justin", "Tech"));
+		list.add(new Employee("diana", "Financial"));
+		list.add(new Employee("emma", "Financial"));
+
+		Map<String, List<Employee>> map = list.stream()
+				.collect(Collectors.groupingBy(Employee::getDeptNo));
+
+		map.keySet().forEach(key -> System.out.println("map.get(" + key + ") = " + map.get(key)));
 
 	}
 
@@ -97,8 +159,8 @@ public class ListTest {
 
 		Map<String, List<String>> map = plans.stream().collect(
 				Collectors.groupingBy(
-						x -> x.toString().substring(0,  4),
-						Collectors.mapping(x -> x.toString().substring(5, 10), Collectors.toList())
+						x -> x.substring(0,  4),
+						Collectors.mapping(x -> x.substring(5, 10), Collectors.toList())
 				)
 		);
 

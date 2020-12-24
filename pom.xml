@@ -21,6 +21,12 @@
 
   <dependencies>
 
+    <dependency>
+      <groupId>org.jsoup</groupId>
+      <artifactId>jsoup</artifactId>
+      <version>1.11.3</version>
+    </dependency>
+
     <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
     <dependency>
       <groupId>org.projectlombok</groupId>
@@ -33,6 +39,14 @@
       <groupId>org.apache.poi</groupId>
       <artifactId>poi</artifactId>
       <version>3.12</version>
+
+      <exclusions>
+        <exclusion>
+          <groupId>commons-codec</groupId>
+          <artifactId>commons-codec</artifactId>
+        </exclusion>
+      </exclusions>
+
     </dependency>
 
     <dependency>
@@ -63,11 +77,13 @@
       </dependency>
 
       <!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
+      <!--
+      这里引入的codec是1.10版本，httpmime中已包含了codec的1.11版本，如果使用httpmine的话，这里不用再引入
       <dependency>
           <groupId>commons-codec</groupId>
           <artifactId>commons-codec</artifactId>
           <version>1.10</version>
-      </dependency>
+      </dependency>-->
 
 
       <!-- fastjson start -->

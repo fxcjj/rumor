@@ -4,7 +4,7 @@ package com.vic.java8.functionalinterface;
  * @author 罗利华
  * date: 2019/7/25 15:17
  */
-@FunctionalInterface
+//@FunctionalInterface
 public interface GreetingService {
 
     /**
@@ -23,8 +23,9 @@ public interface GreetingService {
      * 接口中允许定义默认方法，它不是抽象方法
      */
     // default method
-    default void a() {
+    default String a() {
         // method body
+        return null;
     }
 
     // default method

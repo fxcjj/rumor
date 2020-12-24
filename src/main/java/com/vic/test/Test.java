@@ -1,25 +1,80 @@
 package com.vic.test;
 
+import com.alibaba.fastjson.JSON;
 import com.vic.entity.User;
+import org.apache.commons.lang3.StringUtils;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Field;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class  Test {
 
 	
     public static void main(String[] args) throws Exception {
+
+
+
+		List<User> lista = new ArrayList<>();
+		lista.add(new User("u1", "p1"));
+		lista.add(new User("u2", "p1"));
+		lista.add(new User("u3", "p1"));
+
+
+		String pp = "p1";
+
+
+		long count = lista.stream().filter(p -> !StringUtils.equals(p.getPsw(), pp)).count();
+
+//		System.out.println(count);
+
+
+
+		List<User> result = lista.stream().map(user ->{
+			User vo = new User();
+			vo.setUsername(user.getUsername());
+			return vo;
+		}).collect(Collectors.toList());
+
+
+		System.out.println(JSON.toJSONString(result));
+
+
+
+
+
+		Float a = 0.0F;
+		Float b = a * 100;
+//		System.out.println(b);
+
+
+		byte aa = 1;
+		Byte bb = 0;
+//		System.out.println(aa == bb);
+//		JSONObject jsonObject = new JSONObject();
+//		jsonObject.put("code", "1243");
+//		System.out.println(jsonObject.toJSONString());
+
+
+
+/*
+		new JSONObject().put("code", "");
+		JSONArray jsonArray = new JSONArray();
+
+		JSONObject jsonObject1 = new JSONObject();
+		jsonObject1.put("code", "1243");
+		JSONObject jsonObject2 = new JSONObject();
+		jsonObject2.put("code", "546");
+
+		jsonArray.add(jsonObject1);
+		jsonArray.add(jsonObject2);
+
+		System.out.println(jsonArray.toJSONString());*/
+
 
 //		int i = 999;
 //		i--;
@@ -56,7 +111,7 @@ public class  Test {
 
 //    	testUrl();
 
-		System.out.println(test());
+//		System.out.println(test());
 	}
 
 	private static int test() {
