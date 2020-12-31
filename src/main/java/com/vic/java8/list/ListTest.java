@@ -15,13 +15,13 @@ public class ListTest {
 //		test9();
 
 		// 测试groupingBy分组
-		test8();
+//		test8();
 
 		// 从对象集合中取出某个字段的集合
 //		test7();
 
-		// 去重List<Long>
-//		test6();
+		// 去重List
+		test6();
 
 		// 合并两个list并去重
 //		test5();
@@ -110,6 +110,7 @@ public class ListTest {
 	}
 
 	private static void test6() {
+		// 去重
 		List<Long> list = new ArrayList<>();
 		list.add(1L);
 		list.add(187L);
@@ -117,7 +118,21 @@ public class ListTest {
 		list.add(138L);
 		list.add(187L);
 		list = list.stream().distinct().collect(Collectors.toList());
-		list.forEach(System.out::println);
+//		list.forEach(System.out::println);
+
+
+		List<User> lista = new ArrayList<>();
+		lista.add(new User("u1", "p1"));
+		lista.add(new User("u2", "p1"));
+		lista.add(new User("u3", "p2"));
+		lista.add(new User("u4", "p3"));
+		lista.add(new User("u5", "p3"));
+
+		List<User> newList = lista.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(
+				// 利用 TreeSet 的排序去重构造函数来达到去重元素的目的
+				() -> new TreeSet<>(Comparator.comparing(User::getPsw))), ArrayList::new));
+
+		newList.forEach(System.out::println);
 	}
 
 	private static void test5() {
