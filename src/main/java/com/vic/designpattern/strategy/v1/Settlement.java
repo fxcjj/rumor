@@ -7,7 +7,7 @@ package com.vic.designpattern.strategy.v1;
  * 消费区间在[x,1000)为原价
  * 消费区间在[1000,3000)为八折
  * 消费区间在[3000,y)为七折
- * @author 罗利华
+ * @author Victor
  * date: 2019/8/30 10:29
  */
 public class Settlement {

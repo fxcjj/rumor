@@ -1,7 +1,7 @@
 package com.vic.fastjson;
 
 /**
- * @author 罗利华
+ * @author Victor
  * date: 2019/12/13 17:19
  */
 public class CardInfo {

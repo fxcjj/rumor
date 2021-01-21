@@ -3,7 +3,7 @@ package com.vic.designpattern.principle7.lod;
 /**
  * 9 迪米特法则（Lan of Demeter），又称作最少知识法则（Least Knowledge Principle）
  * http://c.biancheng.net/view/1331.html
- * @author 罗利华
+ * @author Victor
  * date: 2020/3/11 16:47
  */
 public class LoDTest {

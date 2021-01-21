@@ -4,7 +4,7 @@ import java.util.stream.DoubleStream;
 
 /**
  * DoubleStream使用
- * @author 罗利华
+ * @author Victor
  * date: 2020/3/14 17:14
  */
 public class DoubleStreamTest {

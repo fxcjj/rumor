@@ -7,7 +7,7 @@ package com.vic.java8.defaultmethod;
  * 4. 当父类和父接口都存在default方法时，优先使用父类中重写的default方法
  * Specially, 如果一个类实现了两个接口，这两个接口中有同名的default方法签名时，此时编译不通过，必须在子类中重写这个default方法。
  *
- * @author 罗利华
+ * @author Victor
  * date: 2019/7/25 14:46
  */
 public class Main {

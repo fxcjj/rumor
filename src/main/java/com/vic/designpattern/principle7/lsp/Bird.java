@@ -2,7 +2,7 @@ package com.vic.designpattern.principle7.lsp;
 
 /**
  * 鸟
- * @author 罗利华
+ * @author Victor
  * date: 2020/3/11 14:44
  */
 public class Bird {

@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * 计算价格工厂
- * @author 罗利华
+ * @author Victor
  * date: 2019/8/30 13:51
  */
 public class PriceFactory {

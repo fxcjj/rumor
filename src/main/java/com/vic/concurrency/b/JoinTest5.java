@@ -1,7 +1,7 @@
 package com.vic.concurrency.b;
 
 /**
- * @author 罗利华
+ * @author Victor
  * date: 2020/5/21 16:14
  */
 public class JoinTest5 {

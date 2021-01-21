@@ -7,7 +7,7 @@ package com.vic.java8.functionalinterface;
  *  b) 允许定义默认方法和覆盖 java.lang.Object 类的方法
  *  c) 当满足条件时，不论是否在接口上声明 @FunctionalInterface 注解，它都是 functional interface
  *
- * @author 罗利华
+ * @author Victor
  * date: 2019/7/25 15:17
  */
 //@FunctionalInterface

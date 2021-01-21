@@ -2,7 +2,7 @@ package com.vic.designpattern.templatemethod.a;
 
 /**
  *
- * @author 罗利华
+ * @author Victor
  * date: 2020/3/11 19:04
  */
 public abstract class AbstractLove {

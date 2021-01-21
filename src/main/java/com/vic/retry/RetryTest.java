@@ -2,7 +2,7 @@ package com.vic.retry;
 
 /**
  * 重试机制
- * @author 罗利华
+ * @author Victor
  * date: 2019/4/15 16:03
  */
 public class RetryTest {

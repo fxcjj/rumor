@@ -1,7 +1,7 @@
 package com.vic.designpattern.templatemethod;
 
 /**
- * @author 罗利华
+ * @author Victor
  * date: 2020/3/11 19:27
  */
 public class HookConcreteClass extends HookAbstractClass {

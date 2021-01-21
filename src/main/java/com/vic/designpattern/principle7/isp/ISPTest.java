@@ -3,7 +3,7 @@ package com.vic.designpattern.principle7.isp;
 /**
  * 8 接口隔离原则（Interface Segregation Principle）
  * http://c.biancheng.net/view/1330.html
- * @author 罗利华
+ * @author Victor
  * date: 2020/3/11 16:18
  */
 public class ISPTest {

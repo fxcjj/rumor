@@ -4,7 +4,7 @@ import javax.swing.*;
 
 /**
  * 具体策略类：红烧大闸蟹
- * @author 罗利华
+ * @author Victor
  * date: 2020/3/12 11:16
  */
 public class BraisedCrabs extends JLabel implements CrabCooking {

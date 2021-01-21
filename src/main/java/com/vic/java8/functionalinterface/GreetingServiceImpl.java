@@ -1,7 +1,7 @@
 package com.vic.java8.functionalinterface;
 
 /**
- * @author 罗利华
+ * @author Victor
  * date: 2020/6/22 16:30
  */
 public class GreetingServiceImpl implements GreetingService {

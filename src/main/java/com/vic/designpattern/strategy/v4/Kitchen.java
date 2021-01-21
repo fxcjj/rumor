@@ -2,7 +2,7 @@ package com.vic.designpattern.strategy.v4;
 
 /**
  * 环境类：厨房
- * @author 罗利华
+ * @author Victor
  * date: 2020/3/12 11:19
  */
 public class Kitchen {

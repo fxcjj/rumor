@@ -7,7 +7,7 @@ import java.util.concurrent.CountDownLatch;
  *
  * 参考
  * 第12章 java内存模型与线程
- * @author 罗利华
+ * @author Victor
  * date: 2020/5/25 17:21
  */
 public class VolatileTest {

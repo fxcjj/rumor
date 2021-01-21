@@ -2,7 +2,7 @@ package com.vic.java8.defaultmethod;
 
 
 /**
- * @author 罗利华
+ * @author Victor
  * date: 2019/7/25 14:43
  */
 public interface Parent {

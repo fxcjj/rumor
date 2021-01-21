@@ -3,7 +3,7 @@ package com.vic.designpattern.principle7.crp;
 /**
  * 10 合成复用原则（Composite Reuse Principle, CRP）,又称作：组合/聚合复用原则（Composite/Aggregate Reuse Principle, CARP）
  * http://c.biancheng.net/view/1333.html
- * @author 罗利华
+ * @author Victor
  * date: 2020/3/11 17:12
  */
 public class CRPTest {

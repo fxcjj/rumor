@@ -12,7 +12,7 @@ import java.util.stream.IntStream;
  * https://www.jianshu.com/p/0bb4daf6c800?from=groupmessage
  * https://www.jianshu.com/p/e429c517e9cb
  * http://www.java67.com/2014/04/java-8-stream-examples-and-tutorial.html
- * @author 罗利华
+ * @author Victor
  * date: 2020/3/14 17:02
  */
 public class StreamTest {

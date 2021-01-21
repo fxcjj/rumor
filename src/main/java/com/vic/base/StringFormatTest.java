@@ -8,7 +8,7 @@ import java.util.Locale;
  * https://www.cnblogs.com/Dhouse/p/7776780.html
  * https://www.cnblogs.com/xytop/archive/2008/08/26/1277125.html
  *
- * @author 罗利华
+ * @author Victor
  * date: 2019/7/18 19:23
  */
 public class StringFormatTest {

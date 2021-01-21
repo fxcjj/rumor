@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 /**
  * 价格范围，含头不含尾
- * @author 罗利华
+ * @author Victor
  * date: 2019/8/30 15:20
  */
 @Target(ElementType.TYPE)

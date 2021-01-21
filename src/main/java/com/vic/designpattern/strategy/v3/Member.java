@@ -4,7 +4,7 @@ import com.vic.designpattern.strategy.v1.CalcPrice;
 
 /**
  * 会员
- * @author 罗利华
+ * @author Victor
  * date: 2019/8/30 13:38
  */
 @PriceRange(max = 1000)

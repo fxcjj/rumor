@@ -3,7 +3,7 @@ package com.vic.designpattern.principle7.lsp;
 /**
  * 5 里氏替换原则（Liskov Substitution Principle）
  * http://c.biancheng.net/view/1324.html
- * @author 罗利华
+ * @author Victor
  * date: 2020/3/11 14:43
  */
 public class Test {

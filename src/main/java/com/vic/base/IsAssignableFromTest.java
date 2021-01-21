@@ -2,7 +2,7 @@ package com.vic.base;
 
 /**
  * Class的isAssignableFrom方法
- * @author 罗利华
+ * @author Victor
  * date: 2019/7/18 15:12
  */
 public class IsAssignableFromTest {
