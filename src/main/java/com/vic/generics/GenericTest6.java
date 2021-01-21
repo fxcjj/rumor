@@ -43,6 +43,7 @@ public class GenericTest6 {
 		// 不能存入任何元素
 //		fruitPlate.setItem(new Fruit()); // compilation error
 //		fruitPlate.setItem(new Apple()); // compilation error
+//		fruitPlate.setItem(new Object()); // compilation error
 
 		// 读取的东西只能放在Fruit或它的基类里
 		Fruit newFruit1 = fruitPlate.getItem();
@@ -50,7 +51,10 @@ public class GenericTest6 {
 //		Apple newFruit3 = fruitPlate.getItem();  // compilation error
 
 		/*
-		原因是编译器只知道容器内是Fruit或者它的派生类，但具体是什么类型不知道。可能是Fruit？可能是Apple？也可能是Banana，RedApple，GreenApple？编译器在看到后面用Plate<Apple>赋值以后，盘子里没有被标上有“苹果”。而是标上一个占位符：CAP#1，来表示捕获一个Fruit或Fruit的子类，具体是什么类不知道，代号CAP#1。然后无论是想往里插入Apple或者Meat或者Fruit编译器都不知道能不能和这个CAP#1匹配，所以就都不允许。
+		原因是编译器只知道容器内是Fruit或者它的派生类，但具体是什么类型不知道。
+		可能是Fruit？可能是Apple？也可能是Banana，RedApple，GreenApple？编译器在看到后面用Plate<Apple>赋值以后，盘子里没有被标上有“苹果”。
+		而是标上一个占位符：CAP#1，来表示捕获一个Fruit或Fruit的子类，具体是什么类不知道，代号CAP#1。
+		然后无论是想往里插入Apple或者Meat或者Fruit编译器都不知道能不能和这个CAP#1匹配，所以就都不允许。
 
 		所以通配符<?>和类型参数<T>的区别就在于，对编译器来说所有的T都代表同一种类型。比如下面这个泛型方法里，三个T都指代同一个类型，要么都是String，要么都是Integer。
 
@@ -68,6 +72,7 @@ public class GenericTest6 {
 		// 存入元素正常
 		fruitPlate1.setItem(new Fruit());
 		fruitPlate1.setItem(new Apple()); // 也是Fruit
+//		fruitPlate1.setItem(new Object()); // compilation error
 
 		// 读取出来的东西只能存放在Object类里
 		Object newFruita = fruitPlate1.getItem();
