@@ -1,4 +1,4 @@
-package com.vic.generic;
+package com.vic.generics;
 
 public class Father {
 	

@@ -1,4 +1,4 @@
-package com.vic.generic;
+package com.vic.generics;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -20,9 +20,11 @@ public class Test<W> {
 	public static void main(String[] args) {
 		Test<String> t = new Test<String>();
 		Class<? extends Test> clazz = t.getClass();
-		
+		Class clazz1 = t.getClass();
+
 		System.out.println(clazz.getName());
-		
+		System.out.println(clazz1.getName());
+
 		Field[] fields = clazz.getDeclaredFields();
 		for(Field f : fields) {
 			/*

@@ -1,4 +1,4 @@
-package com.vic.generic;
+package com.vic.generics;
 
 public class Test3<T> {
 	
@@ -34,7 +34,8 @@ public class Test3<T> {
 		Long e3 = new Long(1);
 
 		Integer v2 = t.v2(e1, e2);
-		
+//		Integer v3 = t.v2(e1, e3); // compilation error, 因为两个参数限制类型相同
+
 		
 	}
 }

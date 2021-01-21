@@ -1,4 +1,4 @@
-package com.vic.generic;
+package com.vic.generics;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,9 +13,9 @@ public class Test4<T> {
 	 */
 	public static void print1(Collection<? extends Father> c) {
 		//丧失了写能力
-//		c.add(new Son1()); //compilation error
-//		c.add(new Son2()); //compilation error
-		
+//		c.add(new Son1("3")); //compilation error
+//		c.add(new Son2("4")); //compilation error
+
 		Iterator<? extends Father> iter = c.iterator();
 		while(iter.hasNext()) {
 			Father next = iter.next();
