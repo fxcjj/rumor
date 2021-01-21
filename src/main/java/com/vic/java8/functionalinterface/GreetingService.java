@@ -1,6 +1,12 @@
 package com.vic.java8.functionalinterface;
 
 /**
+ *
+ * 1. 满足 functional interface 的条件
+ *  a) 仅含有一个抽象方法（默认修饰符public abstract）
+ *  b) 允许定义默认方法和覆盖 java.lang.Object 类的方法
+ *  c) 当满足条件时，不论是否在接口上声明 @FunctionalInterface 注解，它都是 functional interface
+ *
  * @author 罗利华
  * date: 2019/7/25 15:17
  */
@@ -42,13 +48,12 @@ public interface GreetingService {
     }
 
     /**
-     * 允许定义java.lang.Object里的public方法
-     * 在接口中这样写，不被认为是抽象方法（虽然它们是抽象方法）
+     * 在功能接口中，允许覆盖 java.lang.Object 里的public方法，它不被认为是抽象方法（虽然它们是抽象方法）
      * @param obj
      * @return
      */
     // override method of object class
     @Override
-    boolean equals(Object obj);
+    public abstract boolean equals(Object obj);
 
 }

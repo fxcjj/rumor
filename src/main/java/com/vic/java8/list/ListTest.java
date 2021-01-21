@@ -21,7 +21,7 @@ public class ListTest {
 //		test7();
 
 		// 去重List
-		test6();
+//		test6();
 
 		// 合并两个list并去重
 //		test5();
@@ -36,7 +36,7 @@ public class ListTest {
 //		test2();
 
 		// 循环修改、打印元素
-//		test1();
+		test1();
 
 	}
 
@@ -293,10 +293,7 @@ public class ListTest {
 		list.add(new User("u3", "p3"));
 
 		//method 1
-		list.forEach(item -> {
-			item.setUsername(item.getUsername() + "a");
-			System.out.println(item);
-		});
+		list.forEach(item -> item.setUsername(item.getUsername() + "a"));
 
 		//method 2
 		list.forEach(System.out::println);
