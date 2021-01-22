@@ -11,6 +11,13 @@ import java.util.stream.Stream;
 public class ListTest {
 	
 	public static void main(String[] args) {
+
+		// array转list
+		test11();
+
+		// list转array
+//		test10();
+
 		// 测试交集、并集
 //		test9();
 
@@ -36,7 +43,52 @@ public class ListTest {
 //		test2();
 
 		// 循环修改、打印元素
-		test1();
+//		test1();
+
+	}
+
+	private static void test11() {
+
+		/**
+		 * 这种方式是错误，asList返回的Arrays的内部类，重写了集合的一部分方法。
+		 * 本质上还是数组，你也不能用它进行新增和移除操作，甚至当你修改原本的数组时，这个假List的内容也会随之改变。
+		 */
+		Integer[] aa = {1, 2, 3};
+		List<Integer> list = Arrays.asList(aa);
+		System.out.println(list);
+
+
+		// 方式1
+		Integer[] a = {1, 2, 3};
+		List<Integer> list1 = new ArrayList<>(Arrays.asList(a));
+
+		// 方式2 jdk8的stream搞定
+		List list2 = Arrays.stream(a).collect(Collectors.toList());
+
+		// 方式3 借助工具类：Apache Commons Collections
+//		List<String> list3 = new ArrayList<String>();
+//		CollectionUtils.addAll(list3, str);
+
+		// 方式4
+		List<Integer> list4 = new ArrayList<>();
+		for(Integer cc : a) {
+			list4.add(cc);
+		}
+
+	}
+
+	private static void test10() {
+		List<String> list = new ArrayList<>();
+		list.add("1");
+		list.add("2");
+		list.add("3");
+
+		// 返回值只能是 Object[]类，若强转其它类型数组将出现 ClassCastException 错误。
+		Object[] objects = list.toArray();
+
+		// 正确方式
+		String[] array = new String[list.size()];
+		array = list.toArray(array);
 
 	}
 
