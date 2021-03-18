@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author 罗利华
+ * @author Victor
  * date: 2021/3/10 13:53
  */
 @Slf4j
@@ -192,7 +192,7 @@ public class GenTable2EntityUtils {
     }
 
     public static void main(String[] args) {
-        String t = "oa_branch";
+        String t = "oa_count_attendance_day";
         /*for (String col : getColumnNames(t)) {
             System.out.println(col);
         }*/

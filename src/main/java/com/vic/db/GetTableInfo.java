@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author 罗利华
+ * @author Victor
  * date: 2021/3/10 13:53
  */
 public class GetTableInfo {
@@ -166,7 +166,7 @@ public class GetTableInfo {
     public static String sqlType2JavaType(String sqlType) {
         if(sqlType.equalsIgnoreCase("bit")){
             return "boolean";
-        }else if(sqlType.equalsIgnoreCase("tinyint")){
+        }else if(sqlType.equalsIgnoreCase("tinyint") || sqlType.equalsIgnoreCase("TINYINT UNSIGNED")){
             return "Integer";
         }else if(sqlType.equalsIgnoreCase("smallint")){
             return "short";
@@ -176,7 +176,7 @@ public class GetTableInfo {
             return "Long";
         }else if(sqlType.equalsIgnoreCase("float")){
             return "Float";
-        } else if(sqlType.equalsIgnoreCase("double")){
+        } else if(sqlType.equalsIgnoreCase("double") || "DOUBLE UNSIGNED".equalsIgnoreCase(sqlType)) {
             return "Double";
         } else if(sqlType.equalsIgnoreCase("decimal") || sqlType.equalsIgnoreCase("numeric")
                 || sqlType.equalsIgnoreCase("real") || sqlType.equalsIgnoreCase("money")
@@ -186,7 +186,7 @@ public class GetTableInfo {
                 || sqlType.equalsIgnoreCase("nvarchar") || sqlType.equalsIgnoreCase("nchar")
                 || sqlType.equalsIgnoreCase("text")){
             return "String";
-        }else if(sqlType.equalsIgnoreCase("datetime") || "TIMESTAMP".equalsIgnoreCase(sqlType)){
+        }else if(sqlType.equalsIgnoreCase("date") || sqlType.equalsIgnoreCase("datetime") || "TIMESTAMP".equalsIgnoreCase(sqlType)){
             return "Date";
         }else if(sqlType.equalsIgnoreCase("image")){
             return "Blod";
@@ -345,7 +345,7 @@ public class GetTableInfo {
 
 
     public static void main(String[] args) throws Exception {
-        String t = "oa_branch";
+        String t = "oa_count_attendance_day";
         getColumnNames(t);
 
 

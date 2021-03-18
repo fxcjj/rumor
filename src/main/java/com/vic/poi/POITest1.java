@@ -22,7 +22,7 @@ public class POITest1 {
 
     public static void main(String[] args) throws Exception {
 
-        createExcel1();
+        createExcel();
         // 创建excel
 //        createExcel();
 
@@ -111,7 +111,7 @@ public class POITest1 {
         HSSFCreationHelper creationHelper = workbook.getCreationHelper();
         cellStyle2.setDataFormat(creationHelper.createDataFormat().getFormat("yyyy-MM-dd HH:mm:ss"));
 
-
+        // 设置样式、值
         HSSFCell cell2 = row1.createCell(2);
         cell2.setCellStyle(cellStyle2);
         cell2.setCellValue(new Date());
@@ -134,7 +134,7 @@ public class POITest1 {
         HSSFFont font = workbook.createFont();
         font.setFontName("华文行楷");
         font.setFontHeightInPoints((short)15);
-        font.setColor(HSSFColor.RED.index);
+        font.setColor(HSSFColor.HSSFColorPredefined.RED.getIndex());
         cellStyle4.setFont(font);
 
         // 订单金额=个数*单价

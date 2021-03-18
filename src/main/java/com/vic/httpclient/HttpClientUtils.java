@@ -45,7 +45,7 @@ import java.util.*;
  * https://www.cnblogs.com/visec479/p/4820968.html
  *
  * TODO connection pool
- * @author 罗利华
+ * @author Victor
  * date: 2019/7/23 15:11
  */
 public class HttpClientUtils {

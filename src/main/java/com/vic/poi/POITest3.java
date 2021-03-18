@@ -57,11 +57,11 @@ public class POITest3 {
 
         // 表头格式
         HSSFCellStyle cellStyle = workbook.createCellStyle();
-        cellStyle.setAlignment(CellStyle.ALIGN_CENTER);
-        cellStyle.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+//        cellStyle.setAlignment(CellStyle.ALIGN_CENTER);
+//        cellStyle.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
 
         HSSFFont font = workbook.createFont();
-        font.setColor(HSSFColor.BLACK.index);
+        font.setColor(HSSFColor.HSSFColorPredefined.BLACK.getIndex());
         font.setBold(true);
         cellStyle.setFont(font);
 

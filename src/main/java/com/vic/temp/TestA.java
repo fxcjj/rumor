@@ -1,33 +1,15 @@
 package com.vic.temp;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class TestA {
-	
-	private static boolean ready;
-	
-	private static int number;
-	
-	private static class ReaderThread extends Thread {
-		
-		@Override
-		public void run() {
-			while(!ready) {
-				Thread.yield();
-			}
-			System.out.println(number);
-		}
-		
-	}
-	
+
 	public static void main(String[] args) {
-		new ReaderThread().start();
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		number = 23;
-		ready = true;
-		
+		Calendar cal = Calendar.getInstance();
+//		cal.setTime(new Date());
+		cal.set(2021, 2-1, 10);
+		System.out.println(cal.getActualMaximum(Calendar.DAY_OF_MONTH));
 	}
 	
 	

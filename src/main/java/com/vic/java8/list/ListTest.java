@@ -3,6 +3,7 @@ package com.vic.java8.list;
 
 import com.vic.entity.User;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.util.CollectionUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -12,8 +13,13 @@ public class ListTest {
 	
 	public static void main(String[] args) {
 
+
+
+		// 删除list中元素使用iterator
+//		test12();
+
 		// array转list
-		test11();
+//		test11();
 
 		// list转array
 //		test10();
@@ -47,8 +53,33 @@ public class ListTest {
 
 	}
 
-	private static void test11() {
+	private static void test12() {
+		List<String> a = new ArrayList();
+		a.add("1");
+		a.add("2");
 
+		// 反例
+		for (String temp : a) {
+			if ("1".equals(temp)) {
+				a.remove(temp);
+			}
+		}
+		a.forEach(System.out::println);
+
+
+		// 正例
+		// 删除元素的条件
+		boolean co = true;
+		Iterator<String> it = a.iterator();
+		while(it.hasNext()) {
+			String temp = it.next();
+			if (co) {
+				it.remove();
+			}
+		}
+	}
+
+	private static void test11() {
 		/**
 		 * 这种方式是错误，asList返回的Arrays的内部类，重写了集合的一部分方法。
 		 * 本质上还是数组，你也不能用它进行新增和移除操作，甚至当你修改原本的数组时，这个假List的内容也会随之改变。

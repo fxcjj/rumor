@@ -3,6 +3,7 @@ package com.vic.poi;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,7 +24,7 @@ public class CellUtils {
              *  HH:mm:ss  格式的值是 21
              *  yyyy/MM/dd HH:mm:ss 格式的值是 22
              */
-            case Cell.CELL_TYPE_NUMERIC: // 数字
+            case NUMERIC: // 数字
                 //short s = cell.getCellStyle().getDataFormat();
                 if (HSSFDateUtil.isCellDateFormatted(cell)) {// 处理日期格式、时间格式
                     SimpleDateFormat sdf = null;
@@ -44,23 +45,23 @@ public class CellUtils {
 //                    cell.getDateCellValue()
 //                    Date date = HSSFDateUtil.getJavaDate(new Double(cell.getNumericCellValue()));
 
-                    cell.setCellType(Cell.CELL_TYPE_STRING);
+                    cell.setCellType(CellType.STRING);
                     value = cell.getRichStringCellValue().getString();
                 }
                 break;
-            case Cell.CELL_TYPE_STRING:
+            case STRING:
                 value = cell.getStringCellValue();
                 break;
-            case Cell.CELL_TYPE_BOOLEAN:
+            case BOOLEAN:
                 value = String.valueOf(cell.getBooleanCellValue());
                 break;
-            case Cell.CELL_TYPE_FORMULA: // 公式
+            case FORMULA: // 公式
                 value = String.valueOf(cell.getCellFormula());
                 break;
-            case Cell.CELL_TYPE_BLANK: // 空值
+            case BLANK: // 空值
                 value = null;
                 break;
-            case Cell.CELL_TYPE_ERROR: // 故障
+            case ERROR: // 故障
                 value = "非法字符";
                 break;
             default:

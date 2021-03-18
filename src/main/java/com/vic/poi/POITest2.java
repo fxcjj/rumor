@@ -5,6 +5,7 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 
 import javax.swing.filechooser.FileSystemView;
 import java.io.BufferedInputStream;
@@ -92,7 +93,7 @@ public class POITest2 {
         sheet.createRow(2).createCell(0).setCellValue(Calendar.getInstance());
         sheet.createRow(3).createCell(0).setCellValue("字符串");
         sheet.createRow(4).createCell(0).setCellValue(true);
-        sheet.createRow(5).createCell(0).setCellType(Cell.CELL_TYPE_ERROR);
+        sheet.createRow(5).createCell(0).setCellType(CellType.ERROR);
 
         workbook.write(fos);
         fos.close();
