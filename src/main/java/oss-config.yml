@@ -1,0 +1,13 @@
+# 对象存储（亚马逊）
+oss.type: aws
+oss.access-key-id: AKIAZZXB22UFR4ABINHX
+oss.access-key-secret: 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
+oss.bucket: wesaas-mch007-obs
+oss.region: ap-south-1
+oss.endpoint: s3-ap-south-1.amazonaws.com
+oss.sts-endpoint: sts.ap-south-1.amazonaws.com
+oss.sts-role-arn: arn:aws:iam::673709741323:role/osssts
+oss.sts-role-session-name: wesaas-mch007-obs
+oss.sts-policy: "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Action\":\"s3:*\",\"Resource\":\"*\"}]}"
+oss.url-public: https://wesaas-mch007-obs.s3.ap-south-1.amazonaws.com/
+oss.url-private: https://wesaas-mch007-obs.s3-ap-south-1.amazonaws.com/

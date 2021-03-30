@@ -13,8 +13,7 @@ import com.vic.proxy.statistic.AccountImpl;
 public class AccountProxyTest {
 
 	public static void main(String[] args) {
-		// For the JDK proxy classes used below, one proxy can manage many
-		// interfaces.
+		// For the JDK proxy classes used below, one proxy can manage many interfaces.
 		Account account1 = (Account) new AccountProxyFactory().bind(new AccountImpl());
 		System.out.println(account1);
 		account1.queryAccount();

@@ -1,20 +1,24 @@
-package com.vic.easypoi;
+package com.vic.easypoi.entity;
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
+import lombok.Data;
 
 import java.util.Date;
 
+@Data
 public class StudentEntity implements java.io.Serializable {
 
     /**
      * id
      */
     private String id;
+
     /**
      * 学生姓名
      */
     @Excel(name = "学生姓名", height = 20, width = 30, isImportField = "true_st")
     private String name;
+
     /**
      * 学生性别
      */

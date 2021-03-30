@@ -3,7 +3,7 @@ package com.vic.httpclient.xapp;
 
 /**
  * 身份证正面返回对象vo
- * @author: 罗利华
+ * @author: Victor
  * date: 2019/12/05 16:03
  **/
 public class AdvanceCardFrontVo {

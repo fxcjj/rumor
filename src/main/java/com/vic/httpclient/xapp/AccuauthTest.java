@@ -18,20 +18,25 @@ import org.apache.http.util.EntityUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.*;
 
 /**
  * Accuauth三方测试
- * @author 罗利华
+ * @author Victor
  * date: 2019/12/5 15:32
  */
 public class AccuauthTest {
 
 
     public final static Map<String, String> headerMap = new HashMap() {{
+//        put("X-DF-API-ID", "ebeacf7f79fe48adaa1b9e0d39e60ee1");
+//        put("X-DF-API-SECRET", "e073a6b8a4da433d923868ea582b0052");
+
+//        put("X-DF-API-ID", "db07f145d9fc4f1cb50750dff2790476");
+//        put("X-DF-API-SECRET", "72f66ede8758426a88d497ee9ff06afb");
+
         put("X-DF-API-ID", "ebeacf7f79fe48adaa1b9e0d39e60ee1");
         put("X-DF-API-SECRET", "e073a6b8a4da433d923868ea582b0052");
     }};
@@ -39,6 +44,15 @@ public class AccuauthTest {
 
     public static void main(String[] args) throws Exception {
 
+
+        Float a = 0.000985f;
+        float b = 0.98f;
+
+//        System.out.println(Float.toString(a));
+
+//        System.out.println(a < b);
+
+//        System.out.println(new BigDecimal(a).setScale(8, RoundingMode.HALF_UP).toString());
         /*
         accuauth.api-id: ebeacf7f79fe48adaa1b9e0d39e60ee1
         accuauth.api-secret: e073a6b8a4da433d923868ea582b0052
@@ -58,7 +72,7 @@ public class AccuauthTest {
 //        System.out.println(FileUtils.fileToBase64(imageUrl));
 
 //        testLivenessAntiHack2_ok();
-        testLivenessAntiHack();
+//        testLivenessAntiHack();
 
 //        testFace();
 
@@ -68,7 +82,7 @@ public class AccuauthTest {
 
 //        testMask();
 
-//        testOcrWithMask();
+        testOcrWithMask();
 //        testVerifyAd();
 //        testVerifyPan();
     }
@@ -97,6 +111,7 @@ public class AccuauthTest {
         headerMap.put("X-DF-API-SECRET", "e073a6b8a4da433d923868ea582b0052");
 
         Map<String, String> map = new HashMap<>();
+//        map.put("pan", "EHJPM9082E");
         map.put("pan", "EHJPM9082E");
 
         // 识别并返回打码图片
@@ -112,9 +127,10 @@ public class AccuauthTest {
 
         // 识别并返回打码图片
         Map<String, String> map = new HashMap<>();
-        map.put("image_base64", FileUtils.fileToBase64("D:\\work\\flashrupee-product\\ad-front.jpg"));
+        map.put("image_base64", FileUtils.fileToBase64("D:\\work\\flashrupee-product\\测试图片\\耿云\\ad-front.jpg"));
         long startTime = System.currentTimeMillis();
         String result = HttpClientUtils.sendPost(url, headerMap, map);
+        System.out.println("result: " + result);
         System.out.println("elapsed time: " + (System.currentTimeMillis() - startTime));
     }
 
@@ -142,14 +158,14 @@ public class AccuauthTest {
 //        File frontImage = FileUtils.getFileByUrl("http://waterelephant.oss-cn-shanghai.aliyuncs.com/upload/backend/2020-01-05/61_3_03.jpg", "jpg");
 //        System.out.println(frontImage.getName());
 
-//        File file = new File("D:\\work\\flashrupee-product\\accuauth\\c395443a02684dc08499ff07ba623c56");
-        File file = new File("D:\\work\\india-product\\accuauth\\aaaa");
+        File file = new File("D:\\work\\flashrupee-product\\accuauth\\c395443a02684dc08499ff07ba623c56");
+//        File file = new File("D:\\work\\india-product\\accuauth\\aaaa");
 
         multipartMap.put("liveness_data_file", new FileBody(file, ContentType.IMAGE_JPEG, file.getName()));
 
         String result = HttpClientUtils.sendPostForMultipart(url, headerMap, multipartMap, null);
 
-        System.out.println("result:" + result);
+        System.out.println("result2:" + result);
 
     }
 
@@ -252,7 +268,8 @@ public class AccuauthTest {
 //        String imageUrl = "D:\\work\\india-product\\advance\\pan-front2.jpg";
 
         // aadhaar
-        String imageUrl = "D:\\work\\india-product\\ad-front5.png";
+//        String imageUrl = "D:\\work\\flashrupee-product\\测试图片\\bbb.png";
+        String imageUrl = "D:\\work\\flashrupee-product\\测试图片\\耿云\\7896a9422a8f7a4551367bebf82c787.jpg";
         Map<String, String> paramMap = new HashMap<>();
         paramMap.put("image_base64", FileUtils.fileToBase64(imageUrl));
 
