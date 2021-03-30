@@ -1,7 +1,7 @@
 # 对象存储（亚马逊）
 oss.type: aws
-oss.access-key-id: AKIAZZXB22UFR4ABINHX
-oss.access-key-secret: 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
+oss.access-key-id: zzzzzzdfsfsdfs
+oss.access-key-secret: fafdsafdsfsdfsdf
 oss.bucket: wesaas-mch007-obs
 oss.region: ap-south-1
 oss.endpoint: s3-ap-south-1.amazonaws.com
