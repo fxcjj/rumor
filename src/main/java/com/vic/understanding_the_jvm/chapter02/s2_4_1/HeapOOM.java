@@ -1,4 +1,4 @@
-package com.vic.heap;
+package com.vic.understanding_the_jvm.chapter02.s2_4_1;
 
 import java.util.ArrayList;
 import java.util.List;
