@@ -1,6 +1,7 @@
 package com.vic.java8.list;
 
 
+import com.alibaba.fastjson.JSON;
 import com.vic.entity.User;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.CollectionUtils;
@@ -13,7 +14,8 @@ public class ListTest {
 	
 	public static void main(String[] args) {
 
-
+		// entity转换为vo
+		test13();
 
 		// 删除list中元素使用iterator
 //		test12();
@@ -51,6 +53,20 @@ public class ListTest {
 		// 循环修改、打印元素
 //		test1();
 
+	}
+
+	private static void test13() {
+		List<User> lista = new ArrayList<>();
+		lista.add(new User("u1", "p1"));
+		lista.add(new User("u2", "p2"));
+		lista.add(new User("u3", "p3"));
+
+		List<User> result = lista.stream().map(user ->{
+			User vo = new User();
+			vo.setUsername(user.getUsername());
+			return vo;
+		}).collect(Collectors.toList());
+		System.out.println(JSON.toJSONString(result));
 	}
 
 	private static void test12() {

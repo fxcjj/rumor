@@ -1,0 +1,20 @@
+
+依次启动服务端、客户端。
+
+发现服务端报错：
+Exception in thread "main" java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:210)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at sun.nio.cs.StreamDecoder.readBytes(StreamDecoder.java:284)
+	at sun.nio.cs.StreamDecoder.implRead(StreamDecoder.java:326)
+	at sun.nio.cs.StreamDecoder.read(StreamDecoder.java:178)
+	at java.io.InputStreamReader.read(InputStreamReader.java:184)
+	at java.io.BufferedReader.fill(BufferedReader.java:161)
+	at java.io.BufferedReader.readLine(BufferedReader.java:324)
+	at java.io.BufferedReader.readLine(BufferedReader.java:389)
+	at com.vic.socket.a.Server1.main(Server1.java:25)
+
+原因：
+发生在服务端中的read方法，这个方法是阻塞的，当服务端调用read方法后，它一直阻塞在那里，
+因为客户端没有给它一个标识，告诉是否消息发送完成，所以服务端还在一直等待接受客户端的数据，
+结果客户端此时已经关闭了，就是在服务端报错：java.net.SocketException: Connection reset
