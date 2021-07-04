@@ -53,13 +53,14 @@ public class ShiftTest {
 
 	/**
 	 * 不使用临时变量变换两个数
+	 * 同为0，异为1
 	 */
 	private static void swap() {
 		int a = 3;
 		int b = 4;
-		a = a ^ b; //a异或b得到结果
-		b = a ^ b; //结果a异或b，得到原来的a
-		a = a ^ b; //结果a异或现在的b（是原来的a），得到原来的b
+		a = a ^ b; //a 异或 b得到结果
+		b = a ^ b; //结果a 异或 b，得到原来的a
+		a = a ^ b; //结果a 异或 现在的b（是原来的a），得到原来的b
 		
 //		System.out.println(a); //4
 //		System.out.println(b); //3

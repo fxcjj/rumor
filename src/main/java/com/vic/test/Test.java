@@ -13,8 +13,11 @@ public class  Test {
 	
     public static void main(String[] args) throws Exception {
 
+		System.out.println(5 << 2);
+		System.out.println(5 % 2);
+
     	// 测试mysql分库分表路由
-    	testRouting4SplitDBAndTable();
+//    	testRouting4SplitDBAndTable();
 
     	// 测试死循环下创建线程
 //    	testCreateThreadUnderDeadCirculation();

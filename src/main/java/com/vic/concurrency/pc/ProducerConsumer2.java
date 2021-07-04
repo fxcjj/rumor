@@ -13,6 +13,7 @@ public class ProducerConsumer2 {
 
 class Data {
 	String name;
+	// 是否有元素
 	boolean flag;
 	Object lock = new Object();
 	
