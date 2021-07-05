@@ -14,12 +14,13 @@ public class DeadLock {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+
+                // 想获得b
+                synchronized (b) {
+                    System.out.println("获得了b");
+                }
             }
 
-            // 想获得b
-            synchronized (b) {
-                System.out.println("获得了b");
-            }
         }).start();
 
         new Thread(() -> {
@@ -30,13 +31,15 @@ public class DeadLock {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+
+
+                // 想获得a
+                synchronized (a) {
+                    System.out.println("获得了a");
+                }
             }
 
 
-            // 想获得a
-            synchronized (a) {
-                System.out.println("获得了a");
-            }
         }).start();
 
     }
