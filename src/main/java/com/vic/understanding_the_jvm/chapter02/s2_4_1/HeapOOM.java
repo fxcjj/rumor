@@ -12,12 +12,20 @@ import java.util.List;
 public class HeapOOM {
 
     static class OOMObject {
+        byte [] a = new byte[1024*1024]; //1m
     }
+    static int count = 0;
 
     public static void main(String[] args) {
         List<OOMObject> list = new ArrayList<>();
-        while (true) {
-            list.add(new OOMObject());
+        try {
+            while (true) {
+                list.add(new OOMObject());
+                count++;
+            }
+        } catch (OutOfMemoryError e) {
+            System.out.println("count: " + count);
+            e.printStackTrace();
         }
     }
 

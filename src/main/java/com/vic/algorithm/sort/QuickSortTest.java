@@ -5,7 +5,7 @@ package com.vic.algorithm.sort;
  * 
  * References
  * https://www.jianshu.com/p/5f38dd54b11f
- * https://blog.csdn.net/morewindows/article/details/6684558#commentsedit
+ * https://blog.csdn.net/morewindows/article/details/6684558
  * 
  * @author Victor
  */
