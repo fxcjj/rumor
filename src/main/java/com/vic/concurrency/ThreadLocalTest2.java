@@ -30,8 +30,8 @@ public class ThreadLocalTest2 {
 		@Override
 		public void run() {
 			try {
-					Date t = sdf.parse("2016-02-16 17:00:" + i % 60);
-					System.out.println(i + ":" + t);
+				Date t = sdf.parse("2016-02-16 17:00:" + i % 60);
+				System.out.println(i + ": " + t);
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}

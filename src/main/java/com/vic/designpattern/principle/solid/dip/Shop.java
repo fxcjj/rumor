@@ -1,4 +1,4 @@
-package com.vic.designpattern.principle7.dip;
+package com.vic.designpattern.principle.solid.dip;
 
 /**
  * 商店

@@ -1,4 +1,4 @@
-package com.vic.designpattern.principle7.lsp;
+package com.vic.designpattern.principle.solid.lsp;
 
 /**
  * 鸟

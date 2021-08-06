@@ -7,7 +7,7 @@ public class ThreadLocalTest1 {
 	public static void main(String[] args) {
 		TestNum tn = new TestNum();
 		
-		//三个线程共享TestClient
+		//三个线程共享 TestNum
 		TestClient tc1 = new TestClient(tn);
 		TestClient tc2 = new TestClient(tn);
 		TestClient tc3 = new TestClient(tn);
@@ -51,7 +51,7 @@ class TestClient extends Thread {
 	@Override
 	public void run() {
 		for(int i = 0; i < 3; i++) {
-			//每个线程打印3个序列值
+			//每个线程打印各自的3个序列值
 			System.out.println(Thread.currentThread().getName()+", num = " + testNum.getNextNum());
 		}
 	}

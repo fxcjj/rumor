@@ -1,7 +1,7 @@
-package com.vic.designpattern.principle7.isp;
+package com.vic.designpattern.principle.solid.isp;
 
 /**
- * 8 接口隔离原则（Interface Segregation Principle）
+ * 接口隔离原则（Interface Segregation Principle）
  * http://c.biancheng.net/view/1330.html
  * @author Victor
  * date: 2020/3/11 16:18
