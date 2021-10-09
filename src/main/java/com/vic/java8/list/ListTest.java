@@ -14,8 +14,8 @@ public class ListTest {
 	
 	public static void main(String[] args) {
 
-		// entity转换为vo
-		test13();
+		// entity集合转换为vo集合
+//		test13();
 
 		// 删除list中元素使用iterator
 //		test12();
@@ -30,7 +30,7 @@ public class ListTest {
 //		test9();
 
 		// 测试groupingBy分组
-//		test8();
+		test8();
 
 		// 从对象集合中取出某个字段的集合
 //		test7();
@@ -186,12 +186,23 @@ public class ListTest {
 		list.add(new Employee("victor", "Tech"));
 		list.add(new Employee("justin", "Tech"));
 		list.add(new Employee("diana", "Financial"));
+		list.add(new Employee("emma", "Financialaaa"));
 		list.add(new Employee("emma", "Financial"));
 
 		Map<String, List<Employee>> map = list.stream()
 				.collect(Collectors.groupingBy(Employee::getDeptNo));
 
-		map.keySet().forEach(key -> System.out.println("map.get(" + key + ") = " + map.get(key)));
+//		map.keySet().forEach(key -> System.out.println("map.get(" + key + ") = " + map.get(key)));
+
+
+		// 单个字段
+		Map<String, Employee> map2 = list.stream().collect(Collectors.groupingBy(Employee::getName, Collectors.collectingAndThen(Collectors.toList(), value -> value.get(0))));
+
+		map2.keySet().forEach(key -> System.out.println("map2.get(" + key + ") = " + map2.get(key)));
+
+		// 多个字段
+		Map<String, Employee> map3 = list.stream().collect(Collectors.groupingBy(e -> e.getName() + "-" + e.getName(), Collectors.collectingAndThen(Collectors.toList(), value -> value.get(0))));
+
 
 	}
 
