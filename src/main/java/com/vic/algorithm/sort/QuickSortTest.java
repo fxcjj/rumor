@@ -34,17 +34,17 @@ public class QuickSortTest {
 	/**
 	 * 返回调整后基准数的位置
 	 * @param a
-	 * @param low
-	 * @param high
+	 * @param left
+	 * @param right
 	 * @return
 	 */
-	private static void quickSort(int[] a, int low, int high) {
+	private static void quickSort(int[] a, int left, int right) {
 		
-		if(low < high) {
+		if(left < right) {
 		
-			int i = low;
-			int j = high;
-			int x = a[low]; //挖个坑，a[low]就是第一个坑
+			int i = left;
+			int j = right;
+			int x = a[left]; //挖个坑，a[left]就是第一个坑
 			
 			while(i < j) {
 				/**
@@ -79,8 +79,8 @@ public class QuickSortTest {
 			//退出时，i等于j，将x填到a[i]坑
 			a[i] = x;
 			
-			quickSort(a, low, i - 1); //递归调用
-			quickSort(a, i + 1, high);
+			quickSort(a, left, i - 1); //递归调用
+			quickSort(a, i + 1, right);
 		}
 	}
 	
