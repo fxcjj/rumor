@@ -30,7 +30,7 @@ public class MergeSortTest {
             mergeSort(arr, tempArr, left, mid);
             // 递归划分右半区
             mergeSort(arr, tempArr, mid + 1, right);
-            // 合并已经排序的
+            // 合并已经排序的部分
             merge(arr, tempArr, left, mid, right);
         }
     }
