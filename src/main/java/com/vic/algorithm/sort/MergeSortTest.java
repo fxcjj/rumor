@@ -3,7 +3,7 @@ package com.vic.algorithm.sort;
 /**
  * 归并排序
  * 分治（Divide and Conquer）和递归（Recursive）的思想
- * @author luolihua
+ * @author victor
  */
 public class MergeSortTest {
 
