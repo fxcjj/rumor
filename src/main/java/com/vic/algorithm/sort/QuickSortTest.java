@@ -13,7 +13,7 @@ public class QuickSortTest {
 	
 	/**
 	 * 1 取一个基准数
-	 * 2 i = low, j = high, x = arr[i]
+	 * 2 i = left, j = right, x = arr[i]
 	 * 3 此时arr[i]挖了坑，x与arr[j]比较，如果小于或等于x，将arr[j]填到arr[i]
 	 * 4 此时i++，x与arr[i]比较，如果大于x，将arr[i]填到arr[j]
 	 * 5 当i==j时，将arr[i] = x
@@ -44,7 +44,8 @@ public class QuickSortTest {
 		
 			int i = left;
 			int j = right;
-			int x = a[left]; //挖个坑，a[left]就是第一个坑
+			// 挖个坑，a[left]就是第一个坑
+			int x = a[left];
 			
 			while(i < j) {
 				/**
@@ -56,7 +57,8 @@ public class QuickSortTest {
 					j--;
 				}
 				if(i < j) {
-					a[i] = a[j]; //将小于或等于x的a[j]值放到之前的坑a[i]上，这样a[j]成了一个新的坑
+					// 将小于或等于x的a[j]值放到之前的坑a[i]上，这样a[j]成了一个新的坑
+					a[i] = a[j];
 					i++;
 				}
 				
@@ -76,10 +78,11 @@ public class QuickSortTest {
 				}
 			}
 			
-			//退出时，i等于j，将x填到a[i]坑
+			// 退出时，i等于j，将x填到a[i]坑
 			a[i] = x;
-			
-			quickSort(a, left, i - 1); //递归调用
+
+			// 递归调用
+			quickSort(a, left, i - 1);
 			quickSort(a, i + 1, right);
 		}
 	}
