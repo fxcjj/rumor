@@ -1,4 +1,4 @@
-package com.vic.algorithm.sort;
+package com.vic.datastructure.sort;
 
 /**
  * 冒泡排序
