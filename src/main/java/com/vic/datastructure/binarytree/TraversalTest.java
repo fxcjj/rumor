@@ -1,5 +1,7 @@
 package com.vic.datastructure.binarytree;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -47,6 +49,11 @@ public class TraversalTest {
 //        System.out.print("后序遍历：");
 //        postOrder(root);
 //        System.out.println();
+
+        // 1.4 层次遍历
+        System.out.print("层次遍历：");
+        levelOrder(root);
+        System.out.println();
 
 
         // 2 非递归方式遍历
@@ -111,6 +118,37 @@ public class TraversalTest {
         postOrder(node.rightSubtree);
         System.out.print(node.data + " ");
     }
+
+    /**
+     * 层次遍历
+     * @param root
+     */
+    private static void levelOrder(BinNode root) {
+        // 根结点为空
+        if (root == null) {
+            return;
+        }
+        // 设置一个队列保存层序遍历的结点
+        Queue<BinNode> q = new LinkedList<BinNode>();
+        // 根结点入队
+        q.add(root);
+        // 队列非空，结点没有处理完
+        while (!q.isEmpty()) {
+            // 结点出队
+            BinNode tmp = q.poll();
+            // 处理当前结点
+            System.out.print(tmp.data + " ");
+            // 将当前结点的左孩子结点入队
+            if (tmp.leftSubtree != null) {
+                q.add(tmp.leftSubtree);
+            }
+            if (tmp.rightSubtree != null) {
+                // 将当前结点的右孩子结点入队
+                q.add(tmp.rightSubtree);
+            }
+        }
+    }
+
 
 
     /**
